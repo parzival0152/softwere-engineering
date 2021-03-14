@@ -1,6 +1,10 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 // import java.util.Collections;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner; 
 
 public class Main
 {
@@ -10,6 +14,7 @@ public class Main
         boolean exit = false;
         String name;
         String number;
+        String filename;
         ArrayList<Contact> contactList = new ArrayList<>();
         while (!exit)
         {
@@ -96,10 +101,43 @@ public class Main
 
                 case 9:
                     //save to file
+                    System.out.print("Enter file name: ");
+                    filename = input.nextLine();
+                    try {
+                        File f = new File(filename);
+                        if (f.createNewFile()) {
+                          System.out.println("File created: " + f.getName());
+                        } else {
+                          System.out.println("File already exists.");
+                        }
+                        FileWriter fWriter = new FileWriter(f);
+                        for(Contact c : contactList){
+                            fWriter.write(c.toString() + "\n");
+                        }
+                        fWriter.close();
+                      } catch (IOException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                      }
                     break;
 
                 case 10:
                     //read from file
+                    System.out.print("Enter file name: ");
+                    filename = input.nextLine();
+                    File f = new File(filename);
+                    try {
+                        Scanner filereader = new Scanner(f);
+                        while (filereader.hasNextLine()) 
+                        {
+                            String data = filereader.nextLine();
+                            String[] splitdata = data.split(",");
+                            contactList.add(new Contact(splitdata[0], splitdata[1]));
+                        }
+                        filereader.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
                  
                 case 11:
@@ -129,9 +167,9 @@ class Contact{
         this.name = name;
         this.number = number;
     }
-
+    @Override
     public String toString()
     {
-        return this.name + " : "+this.number;
+        return this.name + ","+this.number;
     }
 }
