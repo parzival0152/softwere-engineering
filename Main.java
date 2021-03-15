@@ -1,10 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-// import java.util.Collections;
+import java.util.Collections;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner; 
+import java.util.Comparator;
+import java.util.Scanner;
 
 public class Main
 {
@@ -85,10 +86,14 @@ public class Main
 
                 case 5:
                     //sort contact list by name
+                    Collections.sort(contactList, new NameComperator());
+                    System.out.println("sorted the list by name");
                     break;
 
                 case 6:
                     //sort contact list by number
+                    Collections.sort(contactList, new NumberComperator());
+                    System.out.println("sorted the list by number");
                     break;
 
                 case 7:
@@ -97,6 +102,8 @@ public class Main
 
                 case 8:
                     //sort in reverse
+                    Collections.sort(contactList, new ReverseNameComperator());
+                    System.out.println("sorted the list by name in reverse order");
                     break;
 
                 case 9:
@@ -172,4 +179,32 @@ class Contact{
     {
         return this.name + ","+this.number;
     }
+}
+
+class NameComperator implements Comparator<Contact>{
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o1.name.compareTo(o2.name);
+    }
+
+}
+
+class NumberComperator implements Comparator<Contact>{
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o1.number.compareTo(o2.number);
+    }
+
+}
+
+class ReverseNameComperator implements Comparator<Contact>{
+
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o2.name.compareTo(o1.name);
+    }
+
 }
