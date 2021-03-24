@@ -97,7 +97,18 @@ public class Main
                     break;
 
                 case 7:
-                    //remove dups
+                    //remove dups doesn't work completely
+                    for(int i = 0; i < contactList.size(); i++)
+                    {
+                        for(int j = i+1; j < contactList.size(); j++)
+                        {
+                            if (contactList.get(i).name.equals(contactList.get(j).name) && contactList.get(i).number.equals(contactList.get(j).number))
+                            {
+                                contactList.remove(j);
+                            }
+                        }
+                    }
+                    System.out.println("dupes removed");
                     break;
 
                 case 8:
