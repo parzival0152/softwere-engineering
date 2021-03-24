@@ -97,7 +97,7 @@ public class Main
                     break;
 
                 case 7:
-                    //remove dups doesn't work completely
+                    //remove dups
                     for(int i = 0; i < contactList.size(); i++)
                     {
                         for(int j = i+1; j < contactList.size(); j++)
@@ -105,7 +105,9 @@ public class Main
                             if (contactList.get(i).name.equals(contactList.get(j).name) && contactList.get(i).number.equals(contactList.get(j).number))
                             {
                                 contactList.remove(j);
-                            }
+                                //after removing all places in list get pushed back and increasing j causes skipping
+                                j--;
+                            } 
                         }
                     }
                     System.out.println("dupes removed");
