@@ -107,12 +107,18 @@ public class Main
                             } 
                         }
                     }
-                    System.out.println("dupes removed");
+                    System.out.println("Dupes removed");
                     break;
 
                 case 8:
                     //reverse the exsisting list
-                    System.out.println("not implemented");
+                    for(int i = 0; i < contactList.size()/2; i++)
+                    {
+                        Contact temp = contactList.get(i);
+                        contactList.set(i,contactList.get(contactList.size()-(i+1)));
+                        contactList.set(contactList.size()-(i+1),temp);
+                    }
+                    System.out.println("Reversed list order");
                     break;
 
                 case 9:
