@@ -85,12 +85,13 @@ public class Main
 
                 case 5:
                     //sort contact list by name
-                    System.out.println("not implemented");
+                    
+                    sort(contactList, 0, contactList.size()-1,false);
                     break;
 
                 case 6:
                     //sort contact list by number
-                    sort(contactList, 0, contactList.size()-1);
+                    sort(contactList, 0, contactList.size()-1,true);
                     break;
 
                 case 7:
@@ -182,7 +183,7 @@ public class Main
     } 
 
 
-    public static void merge_num(ArrayList<Contact> arr,int l, int m, int r)
+    public static void merge_num(ArrayList<Contact> arr,int l, int m, int r,boolean choice)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -205,17 +206,35 @@ public class Main
  
         // Initial index of merged subarry array
         int k = l;
-        NumberComperator num_comp = new NumberComperator();
-        while (i < n1 && j < n2) {
-            if (num_comp.compare(L.get(i),R.get(j))<=0) {
-                arr.set(k,L.get(i));
-                i++;
+        NumberComperator numberComperator = new NumberComperator();
+        NameComperator nameComperator = new NameComperator();
+        if(choice)
+        {
+            while (i < n1 && j < n2) {
+                if (numberComperator.compare(L.get(i),R.get(j))<=0) {
+                    arr.set(k,L.get(i));
+                    i++;
+                }
+                else {
+                    arr.set(k,R.get(j));
+                    j++;
+                }
+                k++;
             }
-            else {
-                arr.set(k,R.get(j));
-                j++;
+        }
+        else
+        {
+            while (i < n1 && j < n2) {
+                if (nameComperator.compare(L.get(i),R.get(j))<=0) {
+                    arr.set(k,L.get(i));
+                    i++;
+                }
+                else {
+                    arr.set(k,R.get(j));
+                    j++;
+                }
+                k++;
             }
-            k++;
         }
  
         /* Copy remaining elements of L[] if any */
@@ -235,18 +254,18 @@ public class Main
 
     // Main function that sorts arr using
     // merge_num()
-    public static void  sort(ArrayList<Contact> arr,int l, int r)
+    public static void  sort(ArrayList<Contact> arr,int l, int r,boolean choice)
     {
         if (l < r) {
             // Find the middle point
             int m =l+ (r-l)/2;
  
             // Sort first and second halves
-            sort(arr, l, m);
-            sort(arr, m + 1, r);
+            sort(arr, l, m,choice);
+            sort(arr, m + 1, r,choice);
  
             // Merge the sorted halves
-            merge_num(arr, l, m, r);
+            merge_num(arr, l, m, r,choice);
         }
     }
 }
