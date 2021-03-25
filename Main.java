@@ -85,7 +85,6 @@ public class Main
 
                 case 5:
                     //sort contact list by name
-                    
                     sort(contactList, 0, contactList.size()-1,false);
                     break;
 
@@ -96,16 +95,13 @@ public class Main
 
                 case 7:
                     //remove dups
-                    for(int i = 0; i < contactList.size(); i++)
+                    sort(contactList, 0, contactList.size()-1,false);
+                    for(int i = 0; i < contactList.size()-1; i++)
                     {
-                        for(int j = i+1; j < contactList.size(); j++)
+                        if (contactList.get(i).name.equals(contactList.get(i+1).name) && contactList.get(i).number.equals(contactList.get(i+1).number))
                         {
-                            if (contactList.get(i).name.equals(contactList.get(j).name) && contactList.get(i).number.equals(contactList.get(j).number))
-                            {
-                                contactList.remove(j);
-                                //after removing all places in list get pushed back and increasing j causes skipping
-                                j--;
-                            } 
+                            contactList.remove(i+1);
+                            i--;
                         }
                     }
                     System.out.println("Dupes removed");
@@ -130,10 +126,13 @@ public class Main
                         File f = new File(filename);
                         if (f.createNewFile()) {
                           System.out.println("File created: " + f.getName());
-                        } else {
+                        } 
+                        //in case file already exists
+                        else {
                           System.out.println("File already exists.");
                         }
                         FileWriter fWriter = new FileWriter(f);
+                        //copy all contact list to txt file
                         for(Contact c : contactList){
                             fWriter.write(c.toString() + "\n");
                         }
@@ -151,6 +150,7 @@ public class Main
                     File f = new File(filename);
                     try {
                         Scanner filereader = new Scanner(f);
+                        //as long as file isn't finished
                         while (filereader.hasNextLine()) 
                         {
                             String data = filereader.nextLine();
@@ -169,7 +169,7 @@ public class Main
                     break;
 
                 default:
-                    //default cause we have to have one
+                    //default in case non of the oprtions chosen
                     System.out.println("Error: not an option");
                     break;
             }
@@ -177,13 +177,14 @@ public class Main
         input.close();
     }
 
+    //function clear screen
     public static void clearScreen() {  
         System.out.print("\n\n\n");  
         System.out.flush();
     } 
 
 
-    public static void merge_num(ArrayList<Contact> arr,int l, int m, int r,boolean choice)
+    public static void merge(ArrayList<Contact> arr,int l, int m, int r,boolean choice)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -211,7 +212,7 @@ public class Main
         if(choice)
         {
             while (i < n1 && j < n2) {
-                if (numberComperator.compare(L.get(i),R.get(j))<=0) {
+                if (numberComperator.compare(L.get(i),R.get(j))>=0) {
                     arr.set(k,L.get(i));
                     i++;
                 }
@@ -237,14 +238,14 @@ public class Main
             }
         }
  
-        /* Copy remaining elements of L[] if any */
+        /* Copy remaining elements of L if any */
         while (i < n1) {
             arr.set(k,L.get(i));
             i++;
             k++;
         }
  
-        /* Copy remaining elements of R[] if any */
+        /* Copy remaining elements of R if any */
         while (j < n2) {
             arr.set(k,R.get(j));
             j++;
@@ -253,7 +254,7 @@ public class Main
     }
 
     // Main function that sorts arr using
-    // merge_num()
+    // merge()
     public static void  sort(ArrayList<Contact> arr,int l, int r,boolean choice)
     {
         if (l < r) {
@@ -265,11 +266,12 @@ public class Main
             sort(arr, m + 1, r,choice);
  
             // Merge the sorted halves
-            merge_num(arr, l, m, r,choice);
+            merge(arr, l, m, r,choice);
         }
     }
 }
 
+//the class contact contains name and number
 class Contact{
     String name;
     String number;
@@ -278,6 +280,7 @@ class Contact{
         this.number = number;
     }
     @Override
+    //split name and number by ","
     public String toString()
     {
         return this.name + "," + this.number;
@@ -288,6 +291,7 @@ class Contact{
 class NameComperator implements Comparator<Contact>{
 
     @Override
+    //change base comperator to compare by contact name
     public int compare(Contact o1, Contact o2) {
         return o1.name.compareTo(o2.name);
     }
@@ -297,7 +301,9 @@ class NameComperator implements Comparator<Contact>{
 class NumberComperator implements Comparator<Contact>{
 
     @Override
-    public int compare(Contact o1, Contact o2) {
+    //change base comperator to compare by contact number
+    public int compare(Contact o1, Contact o2)
+    {
         return o1.number.compareTo(o2.number);
     }
 
