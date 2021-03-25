@@ -90,7 +90,7 @@ public class Main
 
                 case 6:
                     //sort contact list by number
-                    merge_num(contactList, 0, contactList.size()-1);
+                    sort(contactList, 0, contactList.size()-1);
                     break;
 
                 case 7:
@@ -212,7 +212,7 @@ public class Main
                 i++;
             }
             else {
-                arr.set(k,R.get(i));
+                arr.set(k,R.get(j));
                 j++;
             }
             k++;
@@ -233,9 +233,9 @@ public class Main
         }
     }
 
-    // Main function that sorts arr[l..r] using
-    // merge()
-    void sort(int arr[], int l, int r)
+    // Main function that sorts arr using
+    // merge_num()
+    public static void  sort(ArrayList<Contact> arr,int l, int r)
     {
         if (l < r) {
             // Find the middle point
@@ -246,7 +246,7 @@ public class Main
             sort(arr, m + 1, r);
  
             // Merge the sorted halves
-            merge(arr, l, m, r);
+            merge_num(arr, l, m, r);
         }
     }
 }
