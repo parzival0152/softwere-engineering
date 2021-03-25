@@ -301,7 +301,7 @@ class NameComperator implements Comparator<Contact>{
 class NumberComperator implements Comparator<Contact>{
 
     @Override
-    //change base comperator to compare by contact number
+    //change base comperator to compare by contact number.
     public int compare(Contact o1, Contact o2)
     {
         return o1.number.compareTo(o2.number);
