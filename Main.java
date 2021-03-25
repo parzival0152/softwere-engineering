@@ -72,14 +72,18 @@ public class Main
 
                 case 4:
                     //find contact by name
+                    boolean exist=false;
                     System.out.print("Enter contact name: ");
                     name = input.nextLine();
                     for (int i = 0; i < contactList.size(); i++) {
                         if(name.equals(contactList.get(i).name))
                         {
                             System.out.println(contactList.get(i));
+                            exist=true;
                         }
                     }
+                    if(!exist)
+                        System.out.println("Contact not found.");
                     input.nextLine();
                     break;
 
@@ -165,6 +169,7 @@ public class Main
                  
                 case 11:
                     //quit
+                    System.out.println("Bye.");
                     exit = true;
                     break;
 
