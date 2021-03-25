@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main
@@ -89,7 +90,7 @@ public class Main
 
                 case 6:
                     //sort contact list by number
-                    System.out.println("not implemented");
+                    merge_num(contactList, 0, contactList.size()-1);
                     break;
 
                 case 7:
@@ -173,6 +174,75 @@ public class Main
         System.out.print("\n\n\n");  
         System.out.flush();
     } 
+
+
+    public static void merge_num(ArrayList<Contact> arr,int l, int m, int r)
+    {
+        // Find sizes of two subarrays to be merged
+        int n1 = m - l + 1;
+        int n2 = r - m;
+ 
+        /* Create temp arrays */
+        ArrayList<Contact> L = new ArrayList<Contact>();
+        ArrayList<Contact> R = new ArrayList<Contact>();
+ 
+        /*Copy data to temp arrays*/
+        for (int i = 0; i < n1; i++)
+            L.add(arr.get(l+i));
+        for (int j = 0; j < n2; j++)
+            R.add(arr.get(m + 1 + j));
+ 
+        /* Merge the temp arrays */
+ 
+        // Initial indexes of first and second subarrays
+        int i = 0, j = 0;
+ 
+        // Initial index of merged subarry array
+        int k = l;
+        NumberComperator num_comp = new NumberComperator();
+        while (i < n1 && j < n2) {
+            if (num_comp.compare(L.get(i),R.get(j))<=0) {
+                arr.set(k,L.get(i));
+                i++;
+            }
+            else {
+                arr.set(k,R.get(i));
+                j++;
+            }
+            k++;
+        }
+ 
+        /* Copy remaining elements of L[] if any */
+        while (i < n1) {
+            arr.set(k,L.get(i));
+            i++;
+            k++;
+        }
+ 
+        /* Copy remaining elements of R[] if any */
+        while (j < n2) {
+            arr.set(k,R.get(j));
+            j++;
+            k++;
+        }
+    }
+
+    // Main function that sorts arr[l..r] using
+    // merge()
+    void sort(int arr[], int l, int r)
+    {
+        if (l < r) {
+            // Find the middle point
+            int m =l+ (r-l)/2;
+ 
+            // Sort first and second halves
+            sort(arr, l, m);
+            sort(arr, m + 1, r);
+ 
+            // Merge the sorted halves
+            merge(arr, l, m, r);
+        }
+    }
 }
 
 class Contact{
@@ -187,4 +257,23 @@ class Contact{
     {
         return this.name + "," + this.number;
     }
+    
+}
+
+class NameComperator implements Comparator<Contact>{
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o1.name.compareTo(o2.name);
+    }
+
+}
+
+class NumberComperator implements Comparator<Contact>{
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o1.number.compareTo(o2.number);
+    }
+
 }
