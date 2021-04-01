@@ -1,7 +1,7 @@
 import java.util.Comparator;
 
 //the class contact contains name and number
-class Contact{
+public class Contact{
     String name;
     String number;
     public Contact(String name, String number) {
