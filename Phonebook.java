@@ -33,7 +33,11 @@ public class Phonebook
             System.out.println("11. exit");
             //get choice
             System.out.print("Your choice: ");
-            option = Integer.parseInt(input.nextLine());
+            try {
+                option = Integer.parseInt(input.nextLine());
+            } catch (Exception e) {
+                option = -1;
+            }
             //cls
             clearScreen();
             //switch based on the option that they chose
