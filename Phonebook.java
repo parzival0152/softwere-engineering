@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Phonebook
+public class Phonebook implements App
 {
+    @Override
     public void run() {
         Scanner input = new Scanner(System.in);
         int option;
