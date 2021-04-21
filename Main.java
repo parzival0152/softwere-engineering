@@ -17,6 +17,7 @@ public class Main {
                     a.run();
                     break;
                 case 2:
+                    System.out.println("Testing");
                 case 3:
                 case 4:
                     System.out.println("Not implemented");

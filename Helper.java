@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 public class Helper {
+    
     public static int option(String... options)
     {
-        Scanner input = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
         int choice = -1;
         do {
             System.out.println("Please choose one of the following options: ");
@@ -12,7 +13,13 @@ public class Helper {
             }
             System.out.print("Your choice: ");
             try {
-                choice = Integer.parseInt(input.nextLine());
+
+                if (input2.hasNext())
+                {
+                    choice = Integer.parseInt(input2.nextLine());
+                }
+                    
+
             } catch (Exception e) {
                 choice = -1;
             }
@@ -20,8 +27,11 @@ public class Helper {
             {
                 System.out.println("Error: not an option");
             }
+            if(choice==5)
+            {
+                input2.close();
+            }
         } while (!(choice>0 && choice<= options.length));
-        input.close();
         return choice;
     }
 }

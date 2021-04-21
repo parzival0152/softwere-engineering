@@ -12,6 +12,7 @@
 
 #mine
 *.txt
+*.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
