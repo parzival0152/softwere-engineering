@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Phonebook implements App
+public class Phonebook extends App
 {
     @Override
     public void run() {
@@ -44,7 +44,23 @@ public class Phonebook implements App
                     System.out.print("Enter contact number: ");
                     number = input.nextLine();
                     contactList.add(new Contact(name, number));
+                    set(contactList);
                     break;
+
+
+                    
+                    //removing d
+                    //
+                    // Collections.sort(contactList, new NameComperator());
+                    // for(int i = 0; i < contactList.size()-1; i++)
+                    // {
+                    //     if (contactList.get(i).name.equals(contactList.get(i+1).name) && contactList.get(i).number.equals(contactList.get(i+1).number))
+                    //     {
+                    //         contactList.remove(i+1);
+                    //         i--;
+                    //     }
+                    // }
+                    // 
 
                 case 2:
                     //remove by name
@@ -57,6 +73,7 @@ public class Phonebook implements App
                             break;
                         }
                     }
+                    set(contactList);
                     break;
 
                 case 3:
@@ -93,20 +110,6 @@ public class Phonebook implements App
                 case 6:
                     //sort contact list by number
                     Collections.sort(contactList, new NumberComperator());
-                    break;
-
-                case 7:
-                    //remove dups
-                    Collections.sort(contactList, new NameComperator());
-                    for(int i = 0; i < contactList.size()-1; i++)
-                    {
-                        if (contactList.get(i).name.equals(contactList.get(i+1).name) && contactList.get(i).number.equals(contactList.get(i+1).number))
-                        {
-                            contactList.remove(i+1);
-                            i--;
-                        }
-                    }
-                    System.out.println("Dupes removed");
                     break;
 
                 case 8:
@@ -177,7 +180,6 @@ public class Phonebook implements App
                     break;
             }
         }
-        input.close();
     }
 
     //function clear screen
@@ -188,6 +190,11 @@ public class Phonebook implements App
 
     public Phonebook() {
         //create instance of class
+    }
+
+    public void print()
+    {
+        //TBI
     }
 }
 

@@ -1,7 +1,23 @@
 /**
  * App
  */
-public interface App {
+import java.util.ArrayList;
+import java.util.Scanner;
 
-    public void run();
+abstract class App {
+    abstract void run();
+    //abstract App[] get();
+    static Scanner Input =new Scanner(System.in);
+    abstract void print();
+    private static ArrayList<Contact> contactList;
+    
+    public void set(ArrayList<Contact> update)
+    {
+        contactList=update;
+    }
+
+    public ArrayList<Contact> get()
+    {
+        return contactList;
+    }
 }
