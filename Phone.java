@@ -4,13 +4,12 @@ public class Phone
     public Phonebook pb;
     public Calander c;
     public SMS s;
-    public Media m;
+
     public Phone()
     {
         this.pb = new Phonebook();
         this.c = new Calander();
         this.s= new SMS();
-        this.m = new Media();
     } 
     public void update()
     {
@@ -39,17 +38,16 @@ public class Phone
                     c.run();
                     break;
                 case 4:
-                    m.run();
+                    System.out.println("Not implemented");
                     break;
                 case 5:
                     quit = true;
+                    //close scanner
                     break;
                 default:
-                    System.out.println("Not an option");
                     break;
             }
         }
-        App.Input.close();
     }
 
 }

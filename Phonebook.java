@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Phonebook extends App
 {
-    ArrayList<Contact> contactList;
+    ArrayList<Contact> contactList = new ArrayList<>();
     @Override
     public void run() {
         int option;
@@ -16,7 +16,7 @@ public class Phonebook extends App
         String name;
         String number;
         String filename;
-        this.contactList = new ArrayList<>();
+        
         while (!exit)
         {
             //get user choice from menu
