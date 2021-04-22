@@ -32,41 +32,78 @@ public class SMS extends App{
                     {
                         System.out.println("Who would you like to talk with?");
                         name = Input.nextLine();
+                        //check if name is in contact list
+                        if(!findName(name))
+                        {
+                            System.out.println("Sorry, this name is not in your contact list.");
+                            break;
+                        }
                         //find if contact already exists
-                         if(findName(name)==-1) //if it doesn't
-                            {
-                                System.out.print("Type your message to "+name+" here: ");
-                                msg = Input.nextLine();
-                                conversations.put(name,msg);
-                                break;
-                            }
-                            else //if it does
-                            {
-                                System.out.print("Type your message to "+name+" here: ");
-                                msg = Input.nextLine();
-                                //uses ; to differentiate between messages
-                                conversations.merge(name,conversations.get(name), (oldValue, newValue) -> oldValue + ";" + newValue); 
-                            }
+                        if(!findConversation(name)) //if it doesn't
+                        {
+                            System.out.print("Type your message to "+name+" here: ");
+                            msg = Input.nextLine();
+                            conversations.put(name,msg);
+                            break;
+                        }
+                        else //if it does
+                        {
+                            System.out.print("Type your message to "+name+" here: ");
+                            msg = Input.nextLine();
+                            //uses ; to differentiate between messages
+                            conversations.merge(name,conversations.get(name), (oldValue, newValue) -> oldValue + ";" + newValue); 
+                        }
                         break;
                     }
                 case 2: //remove conversation
                 {
-                    System.out.println("Which conversation would you like to remove?");
-                    name = Input.nextLine();
-                    conversations.remove(name);
+                    if(!conversations.isEmpty())
+                    {
+                        System.out.println("Enter contact whose conversation you want to remove?");
+                        name = Input.nextLine();
+                        if(!findName(name)) //if contact entered does exist
+                        {
+                            System.out.println("Sorry, this name isn't in your contact list.");
+                            break;
+                        }
+                        if(!findConversation(name))
+                        {
+                            System.out.println("Sorry, you don't have a conversation with this contact.");
+                            break;
+                        }
+                        conversations.remove(name);
+                    }
+                    else
+                        System.out.println("Sorry, you have no conversations");
                     break;
                 }
                 case 3: //print conversation
                 {
                     System.out.println("Which conversation would you like to see?");
                     name = Input.nextLine();
+                    if(!findName(name))
+                    {
+                        System.out.println("Sorry, this name isn't in your contact list.");
+                        break;
+                    }
+                    if(!findConversation(name))
+                    {
+                        System.out.println("Sorry, you don't have a conversation with this contact.");
+                        break;
+                    }
                     print(name);
                     break;
                 }
                 case 4: //find in all conversations
                 {
-                    System.out.println("Enter searching term: ");
+                    if(conversations.isEmpty())
+                    {
+                        System.out.println("Sorry, you have no conversations.");
+                        break;
+                    }
+                    System.out.println("Enter searching term:");
                     msg = Input.nextLine();
+                    System.out.println("The term you searched was found in the conversations with:");
                     for (String i:conversations.keySet()) //go through all conversations if contains searched string output name
                     {
                         if (conversations.get(i).contains(msg))
@@ -78,6 +115,8 @@ public class SMS extends App{
                 }
                 case 5: //print all conversations
                 {
+                    if(conversations.isEmpty())
+                        break;
                     print();
                     break;
                 }
@@ -104,18 +143,26 @@ public class SMS extends App{
         System.out.flush();
     }
 
-    public int findName(String name)
+    //checks if name entered is in contact list
+    public boolean findName(String name)
     {
-        int found=-1;
-        //goes over keys (contact names) and if found returns 1
+        for (Contact i : contactList)
+        {
+            if(name.equals(i.name))
+                return true;
+        }
+        return false;
+    }
+
+    //checks if there is a conversation with contact of entered name
+    public boolean findConversation(String name)
+    {
+        //goes over keys (contact names) and if found returns true
         for (String i : conversations.keySet()) {
             if(name.equals(i))
-            {
-                found=1;
-                break;
-            }
+                return true;
         }
-        return found;
+        return false;
     }
 
     public void print(String name)
