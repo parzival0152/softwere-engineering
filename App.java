@@ -2,6 +2,7 @@
  * App
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 abstract class App {
@@ -18,6 +19,9 @@ abstract class App {
 
     public ArrayList<Contact> get()
     {
-        return contactList;
+        ArrayList<Contact> copy1 = new ArrayList<Contact>();
+        copy1.addAll(contactList);
+        return copy1;
     }
+    
 }

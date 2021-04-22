@@ -16,10 +16,12 @@ public class SMS extends App{
     {
         //try to print contacts to see if we can get access to ContactList
         ArrayList<Contact> contacts = get();
+        System.out.println("Printing Contact List:");
         for(Contact c: contacts)
         {
             System.out.println(c);
         }
+        System.out.println();
 
     }
     

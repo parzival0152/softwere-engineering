@@ -8,15 +8,15 @@ import java.util.Scanner;
 
 public class Phonebook extends App
 {
+    ArrayList<Contact> contactList;
     @Override
     public void run() {
-        Scanner input = new Scanner(System.in);
         int option;
         boolean exit = false;
         String name;
         String number;
         String filename;
-        ArrayList<Contact> contactList = new ArrayList<>();
+        this.contactList = new ArrayList<>();
         while (!exit)
         {
             //get user choice from menu
@@ -27,7 +27,6 @@ public class Phonebook extends App
                 "Find contact by name",
                 "Sort contact list by name",
                 "Sort contact list by number",
-                "Remove duplicates",
                 "Sort in reverse",
                 "Save to file",
                 "Load from file",
@@ -40,32 +39,24 @@ public class Phonebook extends App
                 case 1:
                     //add new contact;
                     System.out.print("Enter contact name: ");
-                    name = input.nextLine();
+                    name = Input.nextLine();
+                    //find if contact already exists
+                    if(findName(name)!=-1)
+                    {
+                        System.out.print("Contact already exists.");
+                        break;
+                    }
+
                     System.out.print("Enter contact number: ");
-                    number = input.nextLine();
+                    number = Input.nextLine();
                     contactList.add(new Contact(name, number));
                     set(contactList);
                     break;
 
-
-                    
-                    //removing d
-                    //
-                    // Collections.sort(contactList, new NameComperator());
-                    // for(int i = 0; i < contactList.size()-1; i++)
-                    // {
-                    //     if (contactList.get(i).name.equals(contactList.get(i+1).name) && contactList.get(i).number.equals(contactList.get(i+1).number))
-                    //     {
-                    //         contactList.remove(i+1);
-                    //         i--;
-                    //     }
-                    // }
-                    // 
-
                 case 2:
                     //remove by name
                     System.out.print("Enter contact name: ");
-                    name = input.nextLine();
+                    name = Input.nextLine();
                     for (int i = 0; i < contactList.size(); i++) {
                         if(name.equals(contactList.get(i).name))
                         {
@@ -82,24 +73,19 @@ public class Phonebook extends App
                     {
                         System.out.println(c);
                     }
-                    input.nextLine();
+                    Input.nextLine();
                     break;
 
                 case 4:
                     //find contact by name
-                    boolean exist=false;
+                    int exist;
                     System.out.print("Enter contact name: ");
-                    name = input.nextLine();
-                    for (int i = 0; i < contactList.size(); i++) {
-                        if(name.equals(contactList.get(i).name))
-                        {
-                            System.out.println(contactList.get(i));
-                            exist=true;
-                        }
-                    }
-                    if(!exist)
-                        System.out.println("Contact not found.");
-                    input.nextLine();
+                    name = Input.nextLine();
+                    exist=findName(name);
+                    if(exist==-1)
+                        System.out.println("Name not found.");
+                    else
+                        System.out.println(contactList.get(exist));
                     break;
 
                 case 5:
@@ -112,7 +98,7 @@ public class Phonebook extends App
                     Collections.sort(contactList, new NumberComperator());
                     break;
 
-                case 8:
+                case 7:
                     //reverse the exsisting list
                     for(int i = 0; i < contactList.size()/2; i++)
                     {
@@ -123,10 +109,10 @@ public class Phonebook extends App
                     System.out.println("Reversed list order");
                     break;
 
-                case 9:
+                case 8:
                     //save to file
                     System.out.print("Enter file name: ");
-                    filename = input.nextLine();
+                    filename = Input.nextLine();
                     try {
                         File f = new File(filename);
                         if (f.createNewFile()) {
@@ -148,10 +134,10 @@ public class Phonebook extends App
                       }
                     break;
 
-                case 10:
+                case 9:
                     //read from file
                     System.out.print("Enter file name: ");
-                    filename = input.nextLine();
+                    filename = Input.nextLine();
                     File f = new File(filename);
                     try {
                         Scanner filereader = new Scanner(f);
@@ -168,7 +154,7 @@ public class Phonebook extends App
                     }
                     break;
                  
-                case 11:
+                case 10:
                     //quit
                     System.out.println("Bye.");
                     exit = true;
@@ -190,6 +176,19 @@ public class Phonebook extends App
 
     public Phonebook() {
         //create instance of class
+    }
+
+    public int findName(String name)
+    {
+        int exist=-1;
+        for (int i = 0; i < contactList.size(); i++) {
+            if(name.equals(contactList.get(i).name))
+            {
+                exist=i;
+                break;
+            }
+        }
+        return exist;
     }
 
     public void print()

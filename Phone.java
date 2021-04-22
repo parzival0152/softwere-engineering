@@ -11,6 +11,10 @@ public class Phone
         this.c = new Calander();
         this.s= new SMS();
     } 
+    public void update()
+    {
+        //updating SMS and Calander according to changed Phonebook
+    }
     public void runp()
     {
         boolean quit = false;
@@ -25,11 +29,14 @@ public class Phone
             switch (option) {
                 case 1:
                     pb.run();
+                    update();
                     break;
                 case 2:
                     s.printContacts();
                     break;
                 case 3:
+                    c.run();
+                    break;
                 case 4:
                     System.out.println("Not implemented");
                     break;
