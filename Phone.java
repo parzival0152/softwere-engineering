@@ -49,6 +49,7 @@ public class Phone
                     break;
             }
         }
+        App.Input.close();
     }
 
 }
