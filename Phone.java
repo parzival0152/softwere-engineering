@@ -32,7 +32,8 @@ public class Phone
                     update();
                     break;
                 case 2:
-                    s.printContacts();
+                    s.run();
+                    update();
                     break;
                 case 3:
                     c.run();
