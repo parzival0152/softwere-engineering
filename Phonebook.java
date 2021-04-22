@@ -175,7 +175,8 @@ public class Phonebook extends App
     } 
 
     public Phonebook() {
-        //create instance of class
+        contactList = null;
+        //create an empty instance of class
     }
 
     public int findName(String name)

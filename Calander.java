@@ -1,12 +1,14 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Calander extends App{
 
     public Date date;
+    ArrayList<Contact> contacts;
 
     public void run()
     {
-
+        contacts = get();
         boolean quit = false;
         while (!quit) {
             int option = Helper.option(
@@ -49,7 +51,32 @@ public class Calander extends App{
     public void add()
     {
         //Add an occasion
-        //is it an event or meeting
+        int choice;
+        boolean valid = false;
+        String name;
+        while(!valid)
+        {
+            System.out.println("Would you like to add an event or a meeting?");
+            System.out.println("1. Event \n2. Meeting \n");
+            choice = Integer.parseInt(Input.nextLine());
+            if (choice == 1)
+            {
+                valid=true;
+                //event
+            }
+            else if (choice == 2)
+            {
+                valid=true;
+                System.out.println("Enter a contact's name:");
+                name = Input.nextLine();
+                
+                //meeting
+            }
+            else
+            {
+                System.out.println("Please choose an option between 1 or 2. \n");
+            }
+        }
     }
 
     public void delete()

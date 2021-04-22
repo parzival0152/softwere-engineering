@@ -10,6 +10,7 @@ abstract class App {
     static Scanner Input =new Scanner(System.in);
     abstract void print();
     private static ArrayList<Contact> contactList;
+    ArrayList<Contact> copy1 = new ArrayList<Contact>();
     
     public void set(ArrayList<Contact> update)
     {
@@ -18,9 +19,19 @@ abstract class App {
 
     public ArrayList<Contact> get()
     {
-        ArrayList<Contact> copy1 = new ArrayList<Contact>();
-        copy1.addAll(contactList);
+        if(contactList != null)
+        {
+            copy1.addAll(contactList);
+        }
+        
         return copy1;
+    }
+
+    public boolean findContact()
+    {
+        boolean exist = false;
+
+        return exist;
     }
     
 }
