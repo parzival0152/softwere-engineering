@@ -41,11 +41,15 @@ public class Phonebook extends App
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     //find if contact already exists
-                    if(findName(name)!=-1)
+                    if (contactList==null)
                     {
-                        System.out.print("Contact already exists.");
-                        break;
+                        if(findContact(name)!=-1)
+                        {
+                            System.out.print("Contact already exists.");
+                            break;
+                        }                        
                     }
+
 
                     System.out.print("Enter contact number: ");
                     number = Input.nextLine();
@@ -81,7 +85,7 @@ public class Phonebook extends App
                     int exist;
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
-                    exist=findName(name);
+                    exist=findContact(name);
                     if(exist==-1)
                         System.out.println("Name not found.");
                     else
@@ -152,6 +156,7 @@ public class Phonebook extends App
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    removeDup();
                     break;
                  
                 case 10:
@@ -175,21 +180,20 @@ public class Phonebook extends App
     } 
 
     public Phonebook() {
-        contactList = null;
-        //create an empty instance of class
+        //create an instance of class
     }
 
-    public int findName(String name)
+    public void removeDup()
     {
-        int exist=-1;
-        for (int i = 0; i < contactList.size(); i++) {
-            if(name.equals(contactList.get(i).name))
+        Collections.sort(contactList, new NameComperator());
+        for(int i = 0; i < contactList.size()-1; i++)
+        {
+            if (contactList.get(i).name.equals(contactList.get(i+1).name) && contactList.get(i).number.equals(contactList.get(i+1).number))
             {
-                exist=i;
-                break;
+                contactList.remove(i+1);
+                i--;
             }
         }
-        return exist;
     }
 
     public void print()

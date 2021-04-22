@@ -28,10 +28,16 @@ abstract class App {
         return copy1;
     }
 
-    public boolean findContact()
+    public int findContact(String name)
     {
-        boolean exist = false;
-
+        int exist=-1;
+        for (int i = 0; i < contactList.size(); i++) {
+            if(name.equals(contactList.get(i).name))
+            {
+                exist=i;
+                break;
+            }
+        }
         return exist;
     }
     
