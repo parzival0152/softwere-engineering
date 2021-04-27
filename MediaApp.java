@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import org.w3c.dom.stylesheets.MediaList;
-
 public class MediaApp extends App{
 
     //to be implemented by omri
