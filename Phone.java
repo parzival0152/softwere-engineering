@@ -1,15 +1,17 @@
 
-public class Phone 
+public class Phone
 {
     public Phonebook pb;
     public Calander c;
     public SMS s;
+    public Media m;
 
     public Phone()
     {
         this.pb = new Phonebook();
         this.c = new Calander();
         this.s= new SMS();
+        this.m= new Media();
     } 
     public void update()
     {
@@ -24,6 +26,7 @@ public class Phone
                 "SMS",
                 "Calander",
                 "Media",
+                "Print all",
                 "Exit"
             );
             switch (option) {
@@ -39,11 +42,21 @@ public class Phone
                     c.run();
                     break;
                 case 4:
-                    System.out.println("Not implemented");
+                    m.run();
                     break;
                 case 5:
+                    System.out.println("This is Phonebook:\n");
+                    pb.print();
+                    System.out.println("This is SMS:\n");
+                    s.print();
+                    System.out.println("This is Calander:\n");
+                    c.print();
+                    System.out.println("This is Media:\n");
+                    m.print();
+                    break;
+                case 6:
                     quit = true;
-                    //close scanner
+                    App.Input.close();
                     break;
                 default:
                     break;
