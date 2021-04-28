@@ -35,6 +35,7 @@ public class SMS extends App{
                         //check if name is in contact list
                         if(!findName(name))
                         {
+                            System.out.println(contactList);
                             System.out.println("Sorry, this name is not in your contact list.");
                             break;
                         }
@@ -51,7 +52,7 @@ public class SMS extends App{
                             System.out.print("Type your message to "+name+" here: ");
                             msg = Input.nextLine();
                             //uses ; to differentiate between messages
-                            conversations.merge(name,conversations.get(name), (oldValue, newValue) -> oldValue + ";" + newValue); 
+                            conversations.merge(name,msg, (oldValue, newValue) -> oldValue + "; " + newValue); 
                         }
                         break;
                     }
