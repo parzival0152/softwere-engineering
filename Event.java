@@ -1,18 +1,18 @@
 import java.util.Date;
 
-public class Event{
-    Date date;
-    int time;
+public class Event extends Occasion{
     String description;
 
-    Event()
-    {
-        
-    }
     Event(Date d, int t, String s)
     {
-        this.date=d;
-        this.time=t;
+        super(d, t);
         this.description=s;
+    }
+    
+    public void print()
+    {
+        super.print();
+        System.out.println("Description is " + this.description);
+
     }
 }

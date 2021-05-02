@@ -31,6 +31,8 @@ abstract class App {
     public int findContact(String name)
     {
         int exist=-1;
+        if(contactList==null)
+            return exist;
         for (int i = 0; i < contactList.size(); i++) {
             if(name.equals(contactList.get(i).name))
             {

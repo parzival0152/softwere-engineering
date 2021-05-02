@@ -1,14 +1,18 @@
 import java.util.Date;
 
-public class Meeting{
-    Date date;
-    int time;
+public class Meeting extends Occasion{
     Contact person;
 
     Meeting(Date d, int t, Contact p)
     {
-        this.date=d;
-        this.time=t;
+        super(d, t);
         this.person=p;
+    }
+
+    public void print()
+    {
+        super.print();
+        System.out.println("Contact person is " + this.person.name);
+
     }
 }

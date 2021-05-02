@@ -52,7 +52,7 @@ public class SMS extends App{
                             System.out.print("Type your message to "+name+" here: ");
                             msg = Input.nextLine();
                             //uses ; to differentiate between messages
-                            conversations.merge(name,msg, (oldValue, newValue) -> oldValue + "; " + newValue); 
+                            conversations.merge(name,msg, (oldValue, newValue) -> oldValue + "\n" + newValue); 
                         }
                         break;
                     }

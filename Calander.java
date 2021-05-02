@@ -1,9 +1,21 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 
 public class Calander extends App{
 
     ArrayList<Contact> contacts;
+    HashMap<String, ArrayList<Integer>> contactMap;
+    ArrayList<Occasion>[] dateArr;
+
+    Calander()
+    {
+        contactMap = new HashMap<String, ArrayList<Integer>>();
+        dateArr = new ArrayList[30];
+        for(int i=0; i<30; i++)
+        {
+            dateArr[i] = new ArrayList<Occasion>();
+        }
+    }
 
     public void run()
     {
@@ -59,25 +71,20 @@ public class Calander extends App{
             System.out.println("1. Event \n2. Meeting \n");
             choice = Integer.parseInt(Input.nextLine());
 
-            int y, m, d, h, mn;
+            int d, h, mn;
             int time;
             String description;
             valid=true;
-            Date date1= new Date();
+            BetterDate date1= new BetterDate();
 
+            //event
             if (choice == 1)
             {
                 valid=true;
-                System.out.println("Please enter year (yyyy), month(mm), day(dd), hour(hh) and minute(mm) seperated with space:\n");
-                y= Integer.parseInt(Input.next());
-                m= Integer.parseInt(Input.next());
-                d= Integer.parseInt(Input.next());
-                h= Integer.parseInt(Input.next());
+                System.out.println("Please enter day(dd), hour(hh) and minute(mm) seperated with enter:\n");
+                d= Integer.parseInt(Input.nextLine());
+                h= Integer.parseInt(Input.nextLine());
                 mn= Integer.parseInt(Input.nextLine());
-                /*
-                big problem!!!!!!!
-                can't create date
-                */
                 System.out.println("Please enter the time the event takes (0-60)\n");
                 time= Integer.parseInt(Input.nextLine());
                 while(time<0||time>60)
@@ -87,36 +94,74 @@ public class Calander extends App{
                 }
                 System.out.println("Please enter description for the event\n");
                 description=Input.nextLine();
+                date1.setDay(d);
+                date1.setHours(h);
+                date1.setMinutes(mn);
                 Event e= new Event(date1, time, description);
-
+                //this print is for checking
+                System.out.println("The Event is in day " + e.date.getDay() + " and hour " + e.date.getHours() + " and minute " + e.date.getMinutes() + "\n");
+                System.out.println("The description is " + e.description );
+                dateArr[d-1].add(e);
+                System.out.println("The occasions on day " + d + "are: ");
+                for( int i=0; i<dateArr[d-1].size(); i++)
+                {
+                    dateArr[d-1].get(i).print();
+                }
             }
+
+            //meeting
             else if (choice == 2)
             {
                 valid=true;
-                System.out.println("Please enter year (yyyy), month(mm), day(dd), hour(hh) and minute(mm) seperated with space:\n");
-                y= Integer.parseInt(Input.next());
-                m= Integer.parseInt(Input.next());
-                d= Integer.parseInt(Input.next());
-                h= Integer.parseInt(Input.next());
-                mn= Integer.parseInt(Input.nextLine());
-                System.out.println("Please enter the time the event takes (0-60)\n");
-                time= Integer.parseInt(Input.nextLine());
-                while(time<0||time>60)
-                {
-                    System.out.println("Please enter a valid time (0-60)\n");
-                    time= Integer.parseInt(Input.nextLine());
-                }
                 System.out.println("Enter a contact's name:");
                 name = Input.nextLine();
                 int place=findContact(name);
-                
-
+                //check if contact exists
                 if(place == -1)
                     System.out.println("This contact does not exist.");
                 else
+                {
+                    System.out.println("Please enter day(dd), hour(hh) and minute(mm) seperated with enter:\n");
+                    d= Integer.parseInt(Input.nextLine());
+                    h= Integer.parseInt(Input.nextLine());
+                    mn= Integer.parseInt(Input.nextLine());
+                    System.out.println("Please enter the time the event takes (0-60)\n");
+                    time= Integer.parseInt(Input.nextLine());
+                    while(time<0||time>60)
+                    {
+                        System.out.println("Please enter a valid time (0-60)\n");
+                        time= Integer.parseInt(Input.nextLine());
+                    }
                     System.out.println("");
                     //adding the print to fix a weird problem
+                    date1.setDay(d);
+                    date1.setHours(h);
+                    date1.setMinutes(mn);
                     Meeting meet1=new Meeting(date1, time, contacts.get(place));
+                    System.out.println("The Event is in day " + meet1.date.getDay() + " and hour " + meet1.date.getHours() + " and minute " + meet1.date.getMinutes() + "\n");
+                    
+                    //check if contact doesn't exist in map
+                    ArrayList<Integer> intList = new ArrayList<>();
+
+                    if(!findContactMap(name))
+                    {
+                        intList.add(d);
+                        contactMap.put(name, intList);
+                        System.out.println("Contact " + name + " has meetings in days " + contactMap.get(name));
+
+                        dateArr[d-1].add(meet1);
+                        System.out.println("The occasions on day " + d + "are: ");
+                        for( int i=0; i<dateArr[d-1].size(); i++)
+                        {
+                            dateArr[d-1].get(i).print();
+                        }
+                    }
+                    else
+                    {
+                        contactMap.get(name).add(d);
+                        System.out.println("Contact " + name + "has meetings in days " + contactMap.get(name));
+                    }
+                }
             }
             else
             {
@@ -179,5 +224,15 @@ public class Calander extends App{
     public void print()
     {
         //TBI
+    }
+
+    public boolean findContactMap(String name)
+    {
+        //goes over keys (contact names) and if found returns true
+        for (String i : contactMap.keySet()) {
+            if(name.equals(i))
+                return true;
+        }
+        return false;
     }
 }
