@@ -3,7 +3,7 @@
 + check that code still works
     + check and fix the reason that option method is looping
 + create App class :heavy_check_mark:
-+ turn Phonebook into a child of App class
++ turn Phonebook into a child of App class :heavy_check_mark:
 + create SMS App :heavy_check_mark:
 + create Calander App
 + create Media App :heavy_check_mark:
@@ -24,5 +24,5 @@
 # Ideas for implementation
 
 + make event class with variables Date date, double length, Contact c (if meeting), String desc (if nto meeting)
-    + use a boolean like in Media (video or music) to differentiate between a meeting and a normal event
-    + Information about class Date - https://docs.oracle.com/javase/8/docs/api/java/sql/Date.html
+    + use a boolean like in Media (video or music) to differentiate between a meeting and a normal event :heavy_check_mark:
+    
