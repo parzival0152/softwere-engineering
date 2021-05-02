@@ -2,11 +2,13 @@ import java.util.Date;
 abstract class Occasion {
     Date date;
     int time;
+    double startTime;
 
     Occasion(Date d, int t)
     {
         this.date=d;
         this.time=t;
+        this.startTime = d.getHours() + d.getMinutes()/60;
     }
 
     public void print()

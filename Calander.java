@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//import jdk.internal.util.xml.impl.Input;
+
 public class Calander extends App{
 
     ArrayList<Contact> contacts;
@@ -56,8 +58,10 @@ public class Calander extends App{
                 default:
                     break;
             }
+            clearScreen();
         }
     }
+
 
     public void add()
     {
@@ -119,6 +123,7 @@ public class Calander extends App{
                 //check if contact exists
                 if(place == -1)
                     System.out.println("This contact does not exist.");
+                //if it does exist
                 else
                 {
                     System.out.println("Please enter day(dd), hour(hh) and minute(mm) seperated with enter:\n");
@@ -130,7 +135,9 @@ public class Calander extends App{
                     while(time<0||time>60)
                     {
                         System.out.println("Please enter a valid time (0-60)\n");
-                        time= Integer.parseInt(Input.nextLine());
+                        time = Integer.parseInt(Input.nextLine());
+                        if(time<0||time>60)
+                            System.out.println("The time entered is invalid.");
                     }
                     System.out.println("");
                     //adding the print to fix a weird problem
@@ -160,12 +167,15 @@ public class Calander extends App{
                     {
                         contactMap.get(name).add(d);
                         System.out.println("Contact " + name + "has meetings in days " + contactMap.get(name));
+                        // adding a meeting with contact to certain day
+                        insertSorted(dateArr[d-1],dateArr[d-1].size(),meet1.startTime,meet1);
                     }
+
                 }
             }
             else
             {
-                System.out.println("Please choose an option between 1 or 2. \n");
+                System.out.println("Please choose an option between 1 or 2.\n");
             }
         }
     }
@@ -204,6 +214,10 @@ public class Calander extends App{
     public void show_date()
     {
         //Show all occasions in a date
+        System.out.println("What day are the meetings you're looking for? (1-30)\n");
+        int day = Integer.parseInt(Input.nextLine());
+        for (Occasion meet:dateArr[day-1])
+            meet.print();
     }
 
     public void show_contact()
@@ -234,5 +248,14 @@ public class Calander extends App{
                 return true;
         }
         return false;
+    }
+
+    static void insertSorted(ArrayList<Occasion> arr, int length, double key, Occasion meet)
+    {
+        int i;
+        for (i = length - 1; (i >= 0 && arr.get(i).startTime > key); i--)
+            arr.set(i+1,arr.get(i));
+ 
+        arr.set(i + 1,meet);
     }
 }

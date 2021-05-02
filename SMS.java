@@ -133,16 +133,12 @@ public class SMS extends App{
                     System.out.println("Error: not an option");
                     break;
             }
+            clearScreen();
         }
        
     }    
     
-    //function clear screen
-    public static void clearScreen() 
-    {  
-        System.out.print("\n\n\n");  
-        System.out.flush();
-    }
+    
 
     //checks if name entered is in contact list
     public boolean findName(String name)

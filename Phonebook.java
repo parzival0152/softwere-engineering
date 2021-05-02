@@ -153,6 +153,7 @@ public class Phonebook extends App
                             contactList.add(new Contact(splitdata[0], splitdata[1]));
                         }
                         filereader.close();
+                        set(contactList);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -173,11 +174,6 @@ public class Phonebook extends App
         }
     }
 
-    //function clear screen
-    public static void clearScreen() {  
-        System.out.print("\n\n\n");  
-        System.out.flush();
-    } 
 
     public Phonebook() {
         //create an instance of class

@@ -37,6 +37,7 @@ public class Media extends App{
                 default:
                     break;
             }
+            clearScreen();
         }
     }
 

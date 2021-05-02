@@ -43,4 +43,11 @@ abstract class App {
         return exist;
     }
     
+    //function clear screen
+    public static void clearScreen() 
+    {  
+        System.out.print("\n\n\n");  
+        System.out.flush();
+    }
+    
 }
