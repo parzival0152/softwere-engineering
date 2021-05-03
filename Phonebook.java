@@ -41,7 +41,7 @@ public class Phonebook extends App
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     //find if contact already exists
-                    if (contactList==null)
+                    if (contactList!=null)
                     {
                         if(findContact(name)!=-1)
                         {
@@ -69,6 +69,8 @@ public class Phonebook extends App
                         }
                     }
                     set(contactList);
+                    update();
+                    
                     break;
 
                 case 3:
@@ -190,6 +192,12 @@ public class Phonebook extends App
                 i--;
             }
         }
+    }
+
+    public void update()
+    {
+        System.out.println("this is phonebook update.");
+        super.update();
     }
 
     public void print()

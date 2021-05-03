@@ -8,8 +8,12 @@ abstract class Occasion {
     {
         this.date=d;
         this.time=t;
-        this.startTime = d.getHours() + d.getMinutes()/60;
+        this.startTime = (double)d.getHours() + (double)(d.getMinutes()/60.0);
+        System.out.println("Hours are:" + this.date.getHours() + " and Minutes are: " + this.date.getMinutes());
+
     }
+
+    abstract String getDetails();
 
     public void print()
     {

@@ -9,6 +9,11 @@ public class Meeting extends Occasion{
         this.person=p;
     }
 
+    public String getDetails()
+    {
+        return(person.name);
+    }
+
     public void print()
     {
         super.print();

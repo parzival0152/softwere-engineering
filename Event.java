@@ -9,6 +9,11 @@ public class Event extends Occasion{
         this.description=s;
     }
     
+    public String getDetails()
+    {
+        return(description);
+    }
+
     public void print()
     {
         super.print();

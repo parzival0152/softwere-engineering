@@ -15,6 +15,7 @@ public class Phone
     } 
     public void update()
     {
+        System.out.println("this is phone update.");
         //updating SMS and Calander according to changed Phonebook
     }
     public void runp()
