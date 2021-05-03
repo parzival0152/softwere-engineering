@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-abstract class App extends Phone {
+abstract class App {
     abstract void run();
     //abstract App[] get();
     static Scanner Input =new Scanner(System.in);
@@ -53,7 +53,6 @@ abstract class App extends Phone {
     public void update()
     {
         System.out.println("this is app update.");
-        super.update();
     }
     
 }
