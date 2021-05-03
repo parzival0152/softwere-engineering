@@ -29,7 +29,7 @@ public class Media extends App{
                 System.out.print("Enter Media's title: \n");
                 name = Input.nextLine();
                 System.out.print("Enter Media's length: \n");
-                time = Integer.parseInt(Input.nextLine());
+                time = Double.parseDouble(Input.nextLine());
                 System.out.print("Please enter 0 is music or 1 for video.\n");
                 type = Boolean.parseBoolean(Input.nextLine());
                     addMedia(name,time,type);
@@ -53,7 +53,7 @@ public class Media extends App{
         }
     }
 
-    public void addMedia(String name,Integer time,Boolean type)
+    public void addMedia(String name,Double time,Boolean type)
     {
         mediaList.add(new MV(name, time, type));
     }
