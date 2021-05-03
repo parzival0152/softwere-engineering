@@ -23,10 +23,22 @@ public class Media extends App{
             );
             switch (option) {
                 case 1:
-                    addMedia();
+                String name;
+                double time;
+                boolean type;
+                System.out.print("Enter Media's title: \n");
+                name = Input.nextLine();
+                System.out.print("Enter Media's length: \n");
+                time = Integer.parseInt(Input.nextLine());
+                System.out.print("Please enter 0 is music or 1 for video.\n");
+                type = Boolean.parseBoolean(Input.nextLine());
+                    addMedia(name,time,type);
                     break;
                 case 2:
-                    playByName();;
+               
+                System.out.print("Enter Media's title: ");
+                name = Input.nextLine();
+                playByName(name);
                     break;
                 case 3:
                     playAll();
@@ -41,26 +53,14 @@ public class Media extends App{
         }
     }
 
-    public void addMedia()
+    public void addMedia(String name,Integer time,Boolean type)
     {
-        String name;
-        double time;
-        boolean type;
-        System.out.print("Enter Media's title: \n");
-        name = Input.nextLine();
-        System.out.print("Enter Media's length: \n");
-        time = Integer.parseInt(Input.nextLine());
-        System.out.print("Please enter 0 is music or 1 for video.\n");
-        type = Boolean.parseBoolean(Input.nextLine());
         mediaList.add(new MV(name, time, type));
     }
 
-    public void playByName()
+    public void playByName(String name)
     {
-        int exist;
-        String name;
-        System.out.print("Enter Media's title: ");
-        name = Input.nextLine();
+       int exist;
         exist=findMV(name);
         if(exist==-1)
             System.out.println("Name not found.");
