@@ -8,8 +8,15 @@ import java.util.Scanner;
 
 public class Phonebook extends App
 {
-    ArrayList<Contact> contactList = new ArrayList<>();
+    Phone p1;
+    public Phonebook(Phone p)
+    {
+        
+       p1=p;
 
+    }
+
+    ArrayList<Contact> contactList = new ArrayList<>();
     @Override
     public void run() {
         int option;
@@ -44,13 +51,14 @@ public class Phonebook extends App
                     System.out.print("Enter contact number: ");
                     number = Input.nextLine();
                     addContact(name,number);
+                    break;
 
                 case 2:
                     //remove by name
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     removeContact(name);
-                    update();
+                    
                     
                     break;
 
@@ -130,10 +138,10 @@ public class Phonebook extends App
         }
     }
 
-    public void update()
+    public void update(String name)
     {
         System.out.println("this is phonebook update.");
-        super.update();
+        p1.update(name);
     }
 
     public void addContact(String name,String number)
@@ -141,27 +149,36 @@ public class Phonebook extends App
         //find if contact already exists
         if (contactList!=null)
         {
-        if(findContact(name)!=-1)
-        {
-        System.out.print("Contact already exists.");
+            if(findContact(name)!=-1)
+            {
+            System.out.print("Contact already exists.");
+            
+            } 
+            else 
         
-        } 
-        else 
-        contactList.add(new Contact(name, number));
-        set(contactList);
+            {
+            contactList.add(new Contact(name, number));
+            set(contactList);
+            
+            }
         }
+
+
     }
      
     public void removeContact(String name)
     {
-        for (int i = 0; i < contactList.size(); i++) {
-            if(name.equals(contactList.get(i).name))
-            {
-                contactList.remove(i);
-                break;
-            }
-        }
+        int found;
+        found=findContact(name);
+        if(found!=-1)
+        {
+        contactList.remove(found);
         set(contactList);
+        update(name);
+
+        }
+        
+
     }
 
     public void findContactByName(String name)

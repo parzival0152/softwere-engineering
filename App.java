@@ -13,6 +13,7 @@ abstract class App {
     private static ArrayList<Contact> contactList;
     ArrayList<Contact> copy1 = new ArrayList<Contact>();
     
+    
     public void set(ArrayList<Contact> update)
     {
         contactList=update;
@@ -43,6 +44,14 @@ abstract class App {
         return exist;
     }
     
+    public Contact getContact(int index)
+    {
+    
+      return (contactList.get(index));
+    }
+
+
+
     //function clear screen
     public static void clearScreen() 
     {  

@@ -8,15 +8,19 @@ public class Phone
 
     public Phone()
     {
-        this.pb = new Phonebook();
+        this.pb = new Phonebook(this);
         this.c = new Calander();
         this.s= new SMS();
         this.m= new Media();
     } 
-    public void update()
+    public void update(String name)
     {
         System.out.println("this is phone update.");
         
+        //updating SMS and Calander according to changed Phonebook
+        s.update(name);
+
+
     }
     public void runp()
     {
@@ -33,11 +37,11 @@ public class Phone
             switch (option) {
                 case 1:
                     pb.run();
-                    update();
+                    
                     break;
                 case 2:
                     s.run();
-                    update();
+                   
                     break;
                 case 3:
                     c.run();
