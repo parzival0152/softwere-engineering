@@ -357,6 +357,7 @@ public class Calander extends App{
 
     public void update(String name)
     {
+        System.out.println("This calander update.");
         //remove contact from contactMap
         int day;
         
