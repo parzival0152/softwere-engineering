@@ -5,7 +5,7 @@ public class SMS extends App{
     
     ArrayList<Contact> contactList;
     HashMap<String, String> conversations;
-   
+    
     public void run()
     {
         contactList = get();
@@ -188,5 +188,16 @@ public class SMS extends App{
         System.out.println();
 
     }
+  
+    public void update(String name)
+{
+
     
 }
+
+
+
+}
+
+
+

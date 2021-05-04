@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Calander extends App{
 
-    ArrayList<Contact> contacts;
+   
     HashMap<String, ArrayList<Integer>> contactMap;
     ArrayList<Occasion>[] dateArr;
 
@@ -21,7 +21,7 @@ public class Calander extends App{
 
     public void run()
     {
-        contacts = get();
+       
         boolean quit = false;
         while (!quit) {
             int option = Helper.option(
@@ -324,7 +324,7 @@ public class Calander extends App{
         date1.setHours(hour);
         date1.setMinutes(minute);
         int place=findContact(details);
-        Meeting meet1 = new Meeting(date1, time, contacts.get(place));
+        Meeting meet1 = new Meeting(date1, time, getContact(place));
         //check if contact doesn't exist in map
         ArrayList<Integer> intList = new ArrayList<>();
         if(!findContactMap(details))
@@ -352,4 +352,15 @@ public class Calander extends App{
 
 
     }
+
+    public void update(String name)
+    {
+    
+
+
+
+    }
+
+
+
 }

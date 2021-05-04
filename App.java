@@ -43,6 +43,14 @@ abstract class App {
         return exist;
     }
     
+    public Contact getContact(int index)
+    {
+    
+      return (contactList.get(index));
+    }
+
+
+
     //function clear screen
     public static void clearScreen() 
     {  
