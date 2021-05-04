@@ -4,7 +4,6 @@ import java.util.HashMap;
 //import jdk.internal.util.xml.impl.Input;
 
 public class Calander extends App{
-
    
     HashMap<String, ArrayList<Integer>> contactMap;
     ArrayList<Occasion>[] dateArr;
@@ -241,6 +240,7 @@ public class Calander extends App{
     static void insertSorted(ArrayList<Occasion> arr, int length, double key, Occasion meet)
     {
         int i;
+        System.out.println("Checking insertedSorted******" );
         System.out.println("The occasions on this day are: " );
         arr.add(length, meet);
         for (i = length - 1; (i >= 0 && arr.get(i).startTime > key); i--)
@@ -249,7 +249,9 @@ public class Calander extends App{
         }
         arr.set(i + 1,meet);
         for(int j=0; j<arr.size(); j++)
-            System.out.println("time of occasion is: " + arr.get(j).startTime + "\nAnd placement is " + j);
+            System.out.println("Time of occasion is: " + arr.get(j).startTime + "And placement is " + j);
+        
+        System.out.println("End of hecking insertedSorted******" );
 
     }
 
@@ -308,9 +310,9 @@ public class Calander extends App{
             date1.setMinutes(minute);
             Event e= new Event(date1, time, details);
             insertSorted(dateArr[day-1],dateArr[day-1].size(),e.startTime,e);
-            System.out.println("The Event is in day " + e.date.getDay() + " and hour " + e.date.getHours() + " and minute " + e.date.getMinutes() + "\n");
+            System.out.println("The Event is in day " + e.date.getDay() + " and time " + e.date.getHours() + ":" + e.date.getMinutes());
             System.out.println("The description is " + e.description );
-            System.out.println("The occasions on day " + day + "are: ");
+            System.out.println("The occasions on day " + day + " are: ");
             for( int i=0; i<dateArr[day-1].size(); i++)
             {
                 dateArr[day-1].get(i).print();
@@ -319,34 +321,35 @@ public class Calander extends App{
         else
         {
             BetterDate date1= new BetterDate();
-        date1.setDay(day);
-        date1.setHours(hour);
-        date1.setMinutes(minute);
-        int place=findContact(details);
-        Meeting meet1 = new Meeting(date1, time, getContact(place));
-        //check if contact doesn't exist in map
-        ArrayList<Integer> intList = new ArrayList<>();
-        if(!findContactMap(details))
-        {
-            intList.add(day);
-            contactMap.put(details, intList);
-            System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
-            insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
-            System.out.println("The occasions on day " + day + "are: ");
-            for( int i=0; i<dateArr[day-1].size(); i++)
+            date1.setDay(day);
+            date1.setHours(hour);
+            date1.setMinutes(minute);
+            int place=findContact(details);
+            Meeting meet1 = new Meeting(date1, time, getContact(place));
+            //check if contact doesn't exist in map
+            ArrayList<Integer> intList = new ArrayList<>();
+            if(!findContactMap(details))
             {
-                dateArr[day-1].get(i).print();
+                intList.add(day);
+                contactMap.put(details, intList);
+                System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
+                insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
+                System.out.println("The occasions on day " + day + " are: ");
+                for( int i=0; i<dateArr[day-1].size(); i++)
+                {
+                    dateArr[day-1].get(i).print();
+                }
             }
-        }
-        else
-        {
-            if(!contactMap.get(details).contains(day))
-                contactMap.get(details).add(day);
-            System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
-            // adding a meeting with contact to certain day
-            insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
-            System.out.println("The Meeting is in day " + meet1.date.getDay() + " and hour " + meet1.date.getHours() + " and minute " + meet1.date.getMinutes() + "\n");
-        }
+            else
+            {
+                if(!contactMap.get(details).contains(day))
+                    contactMap.get(details).add(day);
+
+                System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
+                // adding a meeting with contact to certain day
+                insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
+                System.out.println("The Meeting is in day " + meet1.date.getDay() + " and time " + meet1.date.getHours() + ":" + meet1.date.getMinutes());
+            }
         }
 
 
@@ -354,9 +357,25 @@ public class Calander extends App{
 
     public void update(String name)
     {
-    
-
-
+        //remove contact from contactMap
+        int day;
+        
+        //used the show_contact function
+        for(int i=0; i<contactMap.get(name).size();i++)
+        {
+            day = contactMap.get(name).get(i);
+            for(int j=0; j<dateArr[day-1].size(); j++)
+            {
+                if((dateArr[day-1].get(j) instanceof Meeting) && (dateArr[day-1].get(j).getDetails().equals(name)))
+                {
+                    dateArr[day-1].remove(j);
+                }
+            }        
+        }
+        //remove all meeting with contact
+        contactMap.remove(name);
+        contactMap.keySet().stream().forEach(System.out::println);
+        show_all();
 
     }
 

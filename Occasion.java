@@ -9,7 +9,7 @@ abstract class Occasion {
         this.date=d;
         this.time=t;
         this.startTime = (double)d.getHours() + (double)(d.getMinutes()/60.0);
-        System.out.println("Hours are:" + this.date.getHours() + " and Minutes are: " + this.date.getMinutes());
+        System.out.println("Time is: " + this.date.getHours() + ":" + this.date.getMinutes());
 
     }
 
@@ -17,8 +17,8 @@ abstract class Occasion {
 
     public void print()
     {
-        System.out.println("date is day:" + this.date.getDay() + " hours are:" + this.date.getHours() + 
-        " minutes are:" + this.date.getMinutes() + " and time is " + this.time + "\n");
+        System.out.println("Date is day:" + this.date.getDay() + "\nTime is: " + this.date.getHours() + 
+        ":" + this.date.getMinutes() + " and time length is " + this.time + "\n");
     }
     
 }

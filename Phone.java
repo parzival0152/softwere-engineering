@@ -19,6 +19,7 @@ public class Phone
         
         //updating SMS and Calander according to changed Phonebook
         s.update(name);
+        c.update(name);
 
 
     }
