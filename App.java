@@ -13,6 +13,7 @@ abstract class App {
     private static ArrayList<Contact> contactList;
     ArrayList<Contact> copy1 = new ArrayList<Contact>();
     
+    
     public void set(ArrayList<Contact> update)
     {
         contactList=update;

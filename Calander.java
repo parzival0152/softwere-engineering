@@ -66,7 +66,6 @@ public class Calander extends App{
         }
     }
 
-
     public void add()
     {
         //Add an occasion
