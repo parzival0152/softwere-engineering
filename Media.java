@@ -26,12 +26,18 @@ public class Media extends App{
                     String name;
                     double time;
                     boolean type;
+                    int tmp;
                     System.out.print("Enter Media's title: \n");
                     name = Input.nextLine();
                     System.out.print("Enter Media's length: \n");
                     time = Double.parseDouble(Input.nextLine());
                     System.out.print("Please enter 0 is music or 1 for video.\n");
-                    type = Boolean.parseBoolean(Input.nextLine());
+                    tmp = Integer.parseInt(Input.nextLine());
+                    if(tmp == 1)
+                        type = true;
+                    else
+                        type = false;
+                    System.out.println("type: "+type);
                     addMedia(name,time,type);
                     break;
                 case 2:

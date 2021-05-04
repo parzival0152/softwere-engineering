@@ -224,7 +224,7 @@ public class Calander extends App{
 
     public void print()
     {
-        //TBI
+        show_all();
     }
 
     public boolean findContactMap(String name)
@@ -334,7 +334,7 @@ public class Calander extends App{
                 contactMap.put(details, intList);
                 System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
-                System.out.println("The occasions on day " + day + " are: ");
+                System.out.println("The occasions on day " + day + "are: ");
                 for( int i=0; i<dateArr[day-1].size(); i++)
                 {
                     dateArr[day-1].get(i).print();

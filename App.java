@@ -46,7 +46,6 @@ abstract class App {
     
     public Contact getContact(int index)
     {
-    
       return (contactList.get(index));
     }
 

@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Phonebook extends App
-{
+public class Phonebook extends App {
     Phone p1;
-    public Phonebook(Phone p)
-    {
-        
-       p1=p;
+
+    public Phonebook(Phone p) {
+
+        p1 = p;
 
     }
 
     ArrayList<Contact> contactList = new ArrayList<>();
+
     @Override
     public void run() {
         int option;
@@ -24,42 +24,31 @@ public class Phonebook extends App
         String name;
         String number;
         String filename;
-        
-        while (!exit)
-        {
-            //get user choice from menu
-            option = Helper.option(
-                "Add new contact",
-                "Remove a contact by name",
-                "Print all contacts",
-                "Find contact by name",
-                "Sort contact list by name",
-                "Sort contact list by number",
-                "Sort in reverse",
-                "Save to file",
-                "Load from file",
-                "Exit"
-                );
-            //cls
+
+        while (!exit) {
+            // get user choice from menu
+            option = Helper.option("Add new contact", "Remove a contact by name", "Print all contacts",
+                    "Find contact by name", "Sort contact list by name", "Sort contact list by number",
+                    "Sort in reverse", "Save to file", "Load from file", "Exit");
+            // cls
             clearScreen();
-            //switch based on the option that they chose
+            // switch based on the option that they chose
             switch (option) {
                 case 1:
-                    //add new contact;
+                    // add new contact;
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     System.out.print("Enter contact number: ");
                     number = Input.nextLine();
-                    addContact(name,number);
+                    addContact(name, number);
                     break;
 
                 case 2:
-                    //remove by name
+                    // remove by name
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     removeContact(name);
-                    
-                    
+
                     break;
 
                 case 3:
@@ -67,24 +56,24 @@ public class Phonebook extends App
                     break;
 
                 case 4:
-                    //find contact by name
-                    
+                    // find contact by name
+
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     findContactByName(name);
-                    
+
                     break;
 
                 case 5:
-                    //sort contact list by name
+                    // sort contact list by name
                     sortByName();
-                    
+
                     break;
 
                 case 6:
-                    //sort contact list by number
+                    // sort contact list by number
                     sortByNumber();
-                    
+
                     break;
 
                 case 7:
@@ -93,162 +82,136 @@ public class Phonebook extends App
                     break;
 
                 case 8:
-                    //save to file
+                    // save to file
                     System.out.print("Enter file name: ");
                     filename = Input.nextLine();
                     writeToFile(filename);
                     break;
 
                 case 9:
-                    //read from file
+                    // read from file
                     System.out.print("Enter file name: ");
                     filename = Input.nextLine();
                     readFromFile(filename);
                     break;
-                 
+
                 case 10:
-                    //quit
+                    // quit
                     System.out.println("Bye.");
                     exit = true;
                     break;
 
                 default:
-                    //default in case non of the oprtions chosen
+                    // default in case non of the oprtions chosen
                     System.out.println("Error: not an option");
                     break;
             }
         }
     }
 
-
     public Phonebook() {
-        //create an instance of class
+        // create an instance of class
     }
 
-    public void removeDup()
-    {
+    public void removeDup() {
         Collections.sort(contactList, new NameComperator());
-        for(int i = 0; i < contactList.size()-1; i++)
-        {
-            if (contactList.get(i).name.equals(contactList.get(i+1).name) && contactList.get(i).number.equals(contactList.get(i+1).number))
-            {
-                contactList.remove(i+1);
+        for (int i = 0; i < contactList.size() - 1; i++) {
+            if (contactList.get(i).name.equals(contactList.get(i + 1).name)
+                    && contactList.get(i).number.equals(contactList.get(i + 1).number)) {
+                contactList.remove(i + 1);
                 i--;
             }
         }
     }
 
-    public void update(String name)
-    {
+    public void update(String name) {
         System.out.println("this is phonebook update.");
         p1.update(name);
     }
 
-    public void addContact(String name,String number)
-    {
-        //find if contact already exists
-        if (contactList!=null)
-        {
-            if(findContact(name)!=-1)
+    public void addContact(String name, String number) {
+        // find if contact already exists
+        if (contactList != null) {
+            if (findContact(name) != -1) {
+                System.out.print("Contact already exists.");
+
+            } else
+
             {
-            System.out.print("Contact already exists.");
-            
-            } 
-            else 
-        
-            {
-            contactList.add(new Contact(name, number));
-            set(contactList);
-            
+                contactList.add(new Contact(name, number));
+                set(contactList);
+
             }
         }
-
-
     }
-     
-    public void removeContact(String name)
-    {
+
+    public void removeContact(String name) {
         int found;
-        found=findContact(name);
-        if(found!=-1)
-        {
-        contactList.remove(found);
-        set(contactList);
-        update(name);
-
+        found = findContact(name);
+        if (found != -1) {
+            contactList.remove(found);
+            set(contactList);
+            update(name);
         }
-        
-
     }
 
-    public void findContactByName(String name)
-    {
+    public void findContactByName(String name) {
         int exist;
-        exist=findContact(name);
-        if(exist==-1)
+        exist = findContact(name);
+        if (exist == -1)
             System.out.println("Name not found.");
         else
             System.out.println(contactList.get(exist));
     }
-    public void sortByNumber()
-    {
+
+    public void sortByNumber() {
         Collections.sort(contactList, new NumberComperator());
     }
-    public void sortByName()
-    {
+
+    public void sortByName() {
         Collections.sort(contactList, new NameComperator());
     }
 
-    public void reverseList()
-    {
-       //reverse the exsisting list
-       for(int i = 0; i < contactList.size()/2; i++)
-       {
-           Contact temp = contactList.get(i);
-           contactList.set(i,contactList.get(contactList.size()-(i+1)));
-           contactList.set(contactList.size()-(i+1),temp);
-       }
-
-
+    public void reverseList() {
+        // reverse the exsisting list
+        for (int i = 0; i < contactList.size() / 2; i++) {
+            Contact temp = contactList.get(i);
+            contactList.set(i, contactList.get(contactList.size() - (i + 1)));
+            contactList.set(contactList.size() - (i + 1), temp);
+        }
 
     }
 
-     public void writeToFile(String filename)
-     {
+    public void writeToFile(String filename) {
 
         try {
             File f = new File(filename);
             if (f.createNewFile()) {
-              System.out.println("File created: " + f.getName());
-            } 
-            //in case file already exists
+                System.out.println("File created: " + f.getName());
+            }
+            // in case file already exists
             else {
-              System.out.println("File already exists.");
+                System.out.println("File already exists.");
             }
             FileWriter fWriter = new FileWriter(f);
-            //copy all contact list to txt file
-            for(Contact c : contactList){
+            // copy all contact list to txt file
+            for (Contact c : contactList) {
                 fWriter.write(c.toString() + "\n");
             }
             fWriter.close();
-          } catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-          }
+        }
 
+    }
 
-
-
-     }
-
-    public void readFromFile(String filename)
-    {
+    public void readFromFile(String filename) {
         File f = new File(filename);
         try {
             Scanner filereader = new Scanner(f);
-            //as long as file isn't finished
-            while (filereader.hasNextLine()) 
-            {
+            // as long as file isn't finished
+            while (filereader.hasNextLine()) {
                 String data = filereader.nextLine();
                 String[] splitdata = data.split(",");
                 contactList.add(new Contact(splitdata[0], splitdata[1]));
@@ -259,23 +222,12 @@ public class Phonebook extends App
             e.printStackTrace();
         }
         removeDup();
-
-
-
-
-
     }
 
-
-
-    public void print()
-    {
-        //print all contacts
-        for(Contact c: contactList)
-        {
+    public void print() {
+        // print all contacts
+        for (Contact c : contactList) {
             System.out.println(c);
         }
-        Input.nextLine();
     }
 }
-
