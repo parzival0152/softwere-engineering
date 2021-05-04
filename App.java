@@ -62,6 +62,7 @@ abstract class App {
     public void update()
     {
         System.out.println("this is app update.");
+        
     }
     
 }

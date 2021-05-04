@@ -23,22 +23,21 @@ public class Media extends App{
             );
             switch (option) {
                 case 1:
-                String name;
-                double time;
-                boolean type;
-                System.out.print("Enter Media's title: \n");
-                name = Input.nextLine();
-                System.out.print("Enter Media's length: \n");
-                time = Double.parseDouble(Input.nextLine());
-                System.out.print("Please enter 0 is music or 1 for video.\n");
-                type = Boolean.parseBoolean(Input.nextLine());
+                    String name;
+                    double time;
+                    boolean type;
+                    System.out.print("Enter Media's title: \n");
+                    name = Input.nextLine();
+                    System.out.print("Enter Media's length: \n");
+                    time = Double.parseDouble(Input.nextLine());
+                    System.out.print("Please enter 0 is music or 1 for video.\n");
+                    type = Boolean.parseBoolean(Input.nextLine());
                     addMedia(name,time,type);
                     break;
                 case 2:
-               
-                System.out.print("Enter Media's title: ");
-                name = Input.nextLine();
-                playByName(name);
+                    System.out.print("Enter Media's title: ");
+                    name = Input.nextLine();
+                    playByName(name);
                     break;
                 case 3:
                     playAll();
