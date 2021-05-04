@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Phonebook extends App
 {
     ArrayList<Contact> contactList = new ArrayList<>();
+
     @Override
     public void run() {
         int option;
@@ -149,11 +150,6 @@ public class Phonebook extends App
         contactList.add(new Contact(name, number));
         set(contactList);
         }
-
-        
-        
-
-
     }
      
     public void removeContact(String name)
@@ -166,7 +162,6 @@ public class Phonebook extends App
             }
         }
         set(contactList);
-
     }
 
     public void findContactByName(String name)
