@@ -1,4 +1,4 @@
-
+//class Phone contains apps and updates SMS and Calander according to Phonebook
 public class Phone {
     public Phonebook pb;
     public Calander c;
@@ -46,13 +46,10 @@ public class Phone {
         App.Input.close();
     }
 
-
-
     /*
       getting input from user in helper and send to the right app
     
     */ 
-
 
     public void runp() {
         boolean quit = false;

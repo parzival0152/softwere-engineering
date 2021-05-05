@@ -1,3 +1,4 @@
+//Event contains description, extends Occasion
 import java.util.Date;
 
 public class Event extends Occasion{
@@ -9,6 +10,7 @@ public class Event extends Occasion{
         this.description=s;
     }
     
+    //returns description (variable of Event)
     public String getDetails()
     {
         return(description);
@@ -18,6 +20,5 @@ public class Event extends Occasion{
     {
         super.print();
         System.out.println("Description is " + this.description + ".\n");
-        
     }
 }

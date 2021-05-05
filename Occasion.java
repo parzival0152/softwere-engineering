@@ -1,3 +1,4 @@
+//class that represents both Event and Meeting
 import java.util.Date;
 abstract class Occasion {
     Date date;
@@ -8,9 +9,11 @@ abstract class Occasion {
     {
         this.date=d;
         this.time=t;
+        //represnts time with both hours and minutes
         this.startTime = (double)d.getHours() + (double)(d.getMinutes()/60.0);
     }
 
+    //sends back name or description according to type of class
     abstract String getDetails();
 
     public void print()

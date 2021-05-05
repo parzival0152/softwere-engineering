@@ -4,6 +4,7 @@ import java.util.Iterator;
 public class Media extends App{
     public String title;
     public double length;
+    //video=1 represents video, video=0 represents music
     public Boolean video;
     public ArrayList<MV> mediaList= new ArrayList<>();
 
@@ -11,6 +12,7 @@ public class Media extends App{
 
     public void run()
     {
+
         boolean quit = false;
         while (!quit) {
             int option = Helper.option(
@@ -22,16 +24,13 @@ public class Media extends App{
             clearScreen();
             switch (option) {
                 case 1:
-                    String name;
-                    double time;
                     boolean type;
-                    int tmp;
                     System.out.print("Enter Media's title: \n");
-                    name = Input.nextLine();
+                    String name = Input.nextLine();
                     System.out.print("Enter Media's length: \n");
-                    time = Double.parseDouble(Input.nextLine());
+                    double time = Double.parseDouble(Input.nextLine());
                     System.out.print("Please enter 0 is music or 1 for video.\n");
-                    tmp = Integer.parseInt(Input.nextLine());
+                    int tmp = Integer.parseInt(Input.nextLine());
                     if(tmp == 1)
                         type = true;
                     else
@@ -61,6 +60,7 @@ public class Media extends App{
         mediaList.add(new MV(name, time, type));
     }
 
+    //finds index if exists and prints media
     public void playByName(String name)
     {
         int exist;
@@ -71,6 +71,7 @@ public class Media extends App{
             play(mediaList.get(exist));
     }
 
+    //gets MV and prints out details
     public void play(MV media)
     {
         if (media.video)
@@ -79,6 +80,7 @@ public class Media extends App{
             System.out.println("The song " + media.name + " is now playing for " + media.length + " minutes");
     }
 
+    //searches media according to name
     public int findMV(String name)
     {
         int exist=-1;
@@ -92,6 +94,7 @@ public class Media extends App{
         return exist;
     }
 
+    //prints out all the media
     public void playAll()
     {
         Iterator<MV> it = mediaList.iterator();

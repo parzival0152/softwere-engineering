@@ -1,3 +1,4 @@
+//Meeting contains name, extends Occasion
 import java.util.Date;
 
 public class Meeting extends Occasion{
@@ -9,6 +10,7 @@ public class Meeting extends Occasion{
         this.person=p;
     }
 
+    //returns name (variable of Meeting)
     public String getDetails()
     {
         return(person.name);

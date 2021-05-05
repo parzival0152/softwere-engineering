@@ -2,33 +2,36 @@
  * App
  */
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 abstract class App {
-    abstract void run();
-    //abstract App[] get();
+
+    //scanner for every class that extends App so there will only be one instance of scanner
     static Scanner Input =new Scanner(System.in);
-    abstract void print();
+    //contactList is sent to all classes that extends app
     private static ArrayList<Contact> contactList;
     ArrayList<Contact> copy1 = new ArrayList<Contact>();
-    
-    
+
+    abstract void run();
+    abstract void print();
+
+    //sets the contact list when there are changes in phonebook
     public void set(ArrayList<Contact> update)
     {
         contactList=update;
     }
 
+    //sending the contact list copy to requesting extending classes
     public ArrayList<Contact> get()
     {
         if(contactList != null)
         {
             copy1.addAll(contactList);
         }
-        
         return copy1;
     }
 
+    //finds name in contact list and returns index
     public int findContact(String name)
     {
         int exist=-1;
@@ -44,11 +47,11 @@ abstract class App {
         return exist;
     }
     
+    //return contact list in place of index
     public Contact getContact(int index)
     {
-      return (contactList.get(index));
+        return (contactList.get(index));
     }
-
 
 
     //function clear screen
@@ -57,11 +60,4 @@ abstract class App {
         System.out.print("\n\n\n");  
         System.out.flush();
     }
-
-    public void update()
-    {
-        System.out.println("this is app update.");
-        
-    }
-    
 }

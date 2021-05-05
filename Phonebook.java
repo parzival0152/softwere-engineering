@@ -121,7 +121,6 @@ public class Phonebook extends App {
 
     public void update(String name) 
     {
-        System.out.println("this is phonebook update.");
         p1.update(name);
     }
 
@@ -162,10 +161,12 @@ public class Phonebook extends App {
 
     public void sortByNumber() {
         Collections.sort(contactList, new NumberComperator());
+        set(contactList);
     }
 
     public void sortByName() {
         Collections.sort(contactList, new NameComperator());
+        set(contactList);
     }
 
     public void reverseList() {
@@ -175,6 +176,7 @@ public class Phonebook extends App {
             contactList.set(i, contactList.get(contactList.size() - (i + 1)));
             contactList.set(contactList.size() - (i + 1), temp);
         }
+        set(contactList);
 
     }
 
