@@ -32,11 +32,11 @@ abstract class Occasion {
 
         if (this.date.getMinutes()<10)
         {
-            System.out.print("0" + this.date.getHours());
+            System.out.print("0" + this.date.getMinutes());
         }
         else
         {
-            System.out.print(this.date.getHours());
+            System.out.print(this.date.getMinutes());
         }
 
         System.out.println(" and time length is " + this.time);

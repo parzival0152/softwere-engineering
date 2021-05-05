@@ -32,10 +32,13 @@ public class Phone {
     {
         System.out.println("This is Phonebook:");
         pb.print();
+        System.out.println();
         System.out.println("This is SMS:");
         s.print();
+        System.out.println();
         System.out.println("This is Calander:");
         c.print();
+        System.out.println();
         System.out.println("This is Media:");
         m.print();
     }
