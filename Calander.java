@@ -185,6 +185,8 @@ public class Calander extends App{
     //showContact function shows all meeting with a contact
     public void showContact(String name)
     {
+        if((contactMap==null)||(contactMap.get(name)==null))
+            return ;
         //"Show all meetings with a contact"
         int day;
         
@@ -233,6 +235,8 @@ public class Calander extends App{
     //function findContactMap looks for a name in the contactMap and if found returns true
     public boolean findContactMap(String name)
     {
+        if((contactMap==null)||(contactMap.get(name)==null))
+            return false;
         //goes over keys (contact names)
         Iterator<String> it = contactMap.keySet().iterator();
         while(it.hasNext())
