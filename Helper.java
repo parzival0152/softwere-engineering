@@ -5,6 +5,7 @@ public class Helper {
     {
         int choice = -1;
         do {
+            System.out.println();
             System.out.println("Please choose one of the following options: ");
             for (int i = 0; i < options.length; i++) {
                 System.out.println(i+1 + ") " +options[i]);

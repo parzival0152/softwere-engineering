@@ -65,7 +65,6 @@ public class SMS extends App{
                 case 6:
                 {
                     //quit
-                    System.out.println("Exiting messages.");
                     exit = true;
                     break;
                 }
@@ -197,7 +196,6 @@ public class SMS extends App{
   
     public void update(String name)
     {
-        System.out.println("SMS update"); //debug message
         conversations.remove(name);
     }
 }

@@ -48,7 +48,6 @@ public class Phonebook extends App {
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     removeContact(name);
-
                     break;
 
                 case 3:
@@ -57,23 +56,19 @@ public class Phonebook extends App {
 
                 case 4:
                     // find contact by name
-
                     System.out.print("Enter contact name: ");
                     name = Input.nextLine();
                     findContactByName(name);
-
                     break;
 
                 case 5:
                     // sort contact list by name
                     sortByName();
-
                     break;
 
                 case 6:
                     // sort contact list by number
                     sortByNumber();
-
                     break;
 
                 case 7:
@@ -97,7 +92,6 @@ public class Phonebook extends App {
 
                 case 10:
                     // quit
-                    System.out.println("Bye.");
                     exit = true;
                     break;
 
@@ -115,7 +109,8 @@ public class Phonebook extends App {
 
     public void removeDup() {
         Collections.sort(contactList, new NameComperator());
-        for (int i = 0; i < contactList.size() - 1; i++) {
+        for (int i = 0; i < contactList.size() - 1; i++) 
+        {
             if (contactList.get(i).name.equals(contactList.get(i + 1).name)
                     && contactList.get(i).number.equals(contactList.get(i + 1).number)) {
                 contactList.remove(i + 1);
@@ -124,23 +119,24 @@ public class Phonebook extends App {
         }
     }
 
-    public void update(String name) {
+    public void update(String name) 
+    {
         System.out.println("this is phonebook update.");
         p1.update(name);
     }
 
     public void addContact(String name, String number) {
         // find if contact already exists
-        if (contactList != null) {
-            if (findContact(name) != -1) {
+        if (contactList != null) 
+        {
+            if (findContact(name) != -1) 
+            {
                 System.out.print("Contact already exists.");
-
-            } else
-
+            } 
+            else
             {
                 contactList.add(new Contact(name, number));
                 set(contactList);
-
             }
         }
     }

@@ -6,10 +6,7 @@ public class Media extends App{
     public Boolean video;
     public ArrayList<MV> mediaList= new ArrayList<>();
 
-    public Media()
-    {
-        //TBI
-    }
+    public Media(){} // empty constructor
 
     public void run()
     {
@@ -21,6 +18,7 @@ public class Media extends App{
                 "Play all",
                 "Exit"
             );
+            clearScreen();
             switch (option) {
                 case 1:
                     String name;
@@ -54,7 +52,6 @@ public class Media extends App{
                 default:
                     break;
             }
-            clearScreen();
         }
     }
 
@@ -65,7 +62,7 @@ public class Media extends App{
 
     public void playByName(String name)
     {
-       int exist;
+        int exist;
         exist=findMV(name);
         if(exist==-1)
             System.out.println("Name not found.");

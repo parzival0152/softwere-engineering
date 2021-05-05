@@ -18,6 +18,5 @@ public class Event extends Occasion{
     {
         super.print();
         System.out.println("Description is " + this.description);
-
     }
 }
