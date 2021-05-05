@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 public class SMS extends App{
     
-    HashMap<String, String> conversations;
+    HashMap<String, String> conversations  = new HashMap<String, String>();
     String name,msg;
 
     public void run()
     {
-        conversations = new HashMap<String, String>();
         boolean exit = false;
         int option;
         while (!exit)
@@ -189,6 +188,8 @@ public class SMS extends App{
 
     public void print()
     {
+        if (conversations.isEmpty())
+            return;
         for(String i:conversations.keySet())
         {
             System.out.print(i+": ");
@@ -198,10 +199,9 @@ public class SMS extends App{
   
     public void update(String name)
     {
-        if(conversations!=null)
-        {
-            if(findConversation(name))
-                conversations.remove(name);
-        }
+        if (conversations.isEmpty())
+            return;
+        if(findConversation(name))
+            conversations.remove(name);
     }
 }
