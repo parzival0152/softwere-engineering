@@ -9,16 +9,34 @@ abstract class Occasion {
         this.date=d;
         this.time=t;
         this.startTime = (double)d.getHours() + (double)(d.getMinutes()/60.0);
-        System.out.println("Time is: " + this.date.getHours() + ":" + this.date.getMinutes());
-
     }
 
     abstract String getDetails();
 
     public void print()
     {
-        System.out.println("Date is day:" + this.date.getDay() + "\nTime is: " + this.date.getHours() + 
-        ":" + this.date.getMinutes() + " and time length is " + this.time + "\n");
+        System.out.print("Date is day:" + this.date.getDay() + "\nTime is: ");
+        if (this.date.getHours()<10)
+        {
+            System.out.print("0" + this.date.getHours());
+        }
+        else
+        {
+            System.out.print(this.date.getHours());
+        }
+
+        System.out.print(":");
+
+        if (this.date.getMinutes()<10)
+        {
+            System.out.print("0" + this.date.getHours());
+        }
+        else
+        {
+            System.out.print(this.date.getHours());
+        }
+
+        System.out.println(" and time length is " + this.time + "\n");
     }
     
 }

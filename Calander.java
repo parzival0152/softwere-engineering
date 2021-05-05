@@ -76,30 +76,18 @@ public class Calander extends App{
             System.out.println("Would you like to add an event or a meeting?");
             System.out.println("1. Event \n2. Meeting \n");
             choice = Integer.parseInt(Input.nextLine());
-
-            int d, h, mn;
-            int time;
             String description;
-            valid=true;
+            ArrayList<Integer> arr;
 
             //event
             if (choice == 1)
             {
                 valid=true;
-                System.out.println("Please enter day(dd), hour(hh) and minute(mm) seperated with enter:\n");
-                d= Integer.parseInt(Input.nextLine());
-                h= Integer.parseInt(Input.nextLine());
-                mn= Integer.parseInt(Input.nextLine());
-                System.out.println("Please enter the time the event takes (0-60)\n");
-                time= Integer.parseInt(Input.nextLine());
-                while(time<0||time>60)
-                {
-                    System.out.println("Please enter a valid time (0-60)\n");
-                    time= Integer.parseInt(Input.nextLine());
-                }
+
                 System.out.println("Please enter description for the event\n");
                 description=Input.nextLine();
-                addOccasion( 1, d, h, mn, time, description);
+                arr = getDate();
+                addOccasion( 1, arr.get(0), arr.get(1), arr.get(2), arr.get(3), description);
                 //this print is for checking
 
             }
@@ -117,21 +105,8 @@ public class Calander extends App{
                 //if it does exist
                 else
                 {
-                    System.out.println("Please enter day(dd), hour(hh) and minute(mm) seperated with enter:\n");
-                    d= Integer.parseInt(Input.nextLine());
-                    h= Integer.parseInt(Input.nextLine());
-                    mn= Integer.parseInt(Input.nextLine());
-                    System.out.println("Please enter the time the event takes (0-60)\n");
-                    time= Integer.parseInt(Input.nextLine());
-                    while(time<0||time>60)
-                    {
-                        System.out.println("Please enter a valid time (0-60)\n");
-                        time = Integer.parseInt(Input.nextLine());
-                        if(time<0||time>60)
-                            System.out.println("The time entered is invalid.");
-                    }
-                    System.out.println("");
-                    addOccasion(2, d, h, mn, time, name);
+                    arr = getDate();
+                    addOccasion(2, arr.get(0), arr.get(1), arr.get(2), arr.get(3), name);
                 }
             }
             else
@@ -240,18 +215,12 @@ public class Calander extends App{
     static void insertSorted(ArrayList<Occasion> arr, int length, double key, Occasion meet)
     {
         int i;
-        System.out.println("Checking insertedSorted******" );
-        System.out.println("The occasions on this day are: " );
         arr.add(length, meet);
         for (i = length - 1; (i >= 0 && arr.get(i).startTime > key); i--)
         {
             arr.set(i+1,arr.get(i));
         }
         arr.set(i + 1,meet);
-        for(int j=0; j<arr.size(); j++)
-            System.out.println("Time of occasion is: " + arr.get(j).startTime + "And placement is " + j);
-        
-        System.out.println("End of hecking insertedSorted******" );
 
     }
 
@@ -332,13 +301,15 @@ public class Calander extends App{
             {
                 intList.add(day);
                 contactMap.put(details, intList);
-                System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
+<<<<<<< Updated upstream
                 System.out.println("The occasions on day " + day + "are: ");
                 for( int i=0; i<dateArr[day-1].size(); i++)
                 {
                     dateArr[day-1].get(i).print();
                 }
+=======
+>>>>>>> Stashed changes
             }
             else
             {
@@ -380,6 +351,48 @@ public class Calander extends App{
 
     }
 
+    public ArrayList<Integer> getDate()
+    {
+        int d, h, mn;
+        int time;
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        System.out.println("Please enter day(dd) (1-30):\n");
+        d= Integer.parseInt(Input.nextLine());
+        while(d<1||d>30)
+        {
+            System.out.println("Please enter a valid day (1-30)\n");
+            d= Integer.parseInt(Input.nextLine());
+        }
+        System.out.println("Please enter hour(hh) (0-23):\n");
+        h= Integer.parseInt(Input.nextLine());
+        while(h<0||h>23)
+        {
+            System.out.println("Please enter a valid hour (0-23)\n");
+            h= Integer.parseInt(Input.nextLine());
+        }
+        System.out.println("Please enter minute(mm) (0-59):\n");
+        mn= Integer.parseInt(Input.nextLine());
+        while(mn<0||mn>59)
+        {
+            System.out.println("Please enter a valid minute (0-59)\n");
+            mn= Integer.parseInt(Input.nextLine());
+        }
+        System.out.println("Please enter the time the event takes (0-60)\n");
+        time= Integer.parseInt(Input.nextLine());
+        while(time<0||time>60)
+        {
+            System.out.println("Please enter a valid time (0-60)\n");
+            time= Integer.parseInt(Input.nextLine());
+        }
+
+        arr.add(d);
+        arr.add(h);
+        arr.add(mn);
+        arr.add(time);
+
+        return arr;
+    }
 
 
 }

@@ -16,7 +16,11 @@ public class Event extends Occasion{
 
     public void print()
     {
+        System.out.println("Description is " + this.description + ".");
         super.print();
+<<<<<<< Updated upstream
         System.out.println("Description is " + this.description);
+=======
+>>>>>>> Stashed changes
     }
 }
