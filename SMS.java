@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class SMS extends App{
     
@@ -173,8 +174,10 @@ public class SMS extends App{
     public boolean findConversation(String name)
     {
         //goes over keys (contact names) and if found returns true
-        for (String i : conversations.keySet()) {
-            if(name.equals(i))
+        Iterator<String> it = conversations.keySet().iterator();
+        while(it.hasNext())
+        {
+            if(it.next().equals(name))
                 return true;
         }
         return false;

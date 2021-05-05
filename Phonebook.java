@@ -4,15 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Phonebook extends App {
     Phone p1;
 
-    public Phonebook(Phone p) {
-
+    public Phonebook(Phone p) 
+    {
         p1 = p;
-
     }
 
     ArrayList<Contact> contactList = new ArrayList<>();
@@ -181,6 +181,8 @@ public class Phonebook extends App {
     public void writeToFile(String filename) {
 
         try {
+            Iterator<Contact> it = contactList.iterator();
+
             File f = new File(filename);
             if (f.createNewFile()) {
                 System.out.println("File created: " + f.getName());
@@ -191,8 +193,9 @@ public class Phonebook extends App {
             }
             FileWriter fWriter = new FileWriter(f);
             // copy all contact list to txt file
-            for (Contact c : contactList) {
-                fWriter.write(c.toString() + "\n");
+            while (it.hasNext())
+            {
+                fWriter.write(it.next().toString() + "\n");
             }
             fWriter.close();
         } catch (IOException e) {
@@ -214,7 +217,8 @@ public class Phonebook extends App {
             }
             filereader.close();
             set(contactList);
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         removeDup();
@@ -222,8 +226,10 @@ public class Phonebook extends App {
 
     public void print() {
         // print all contacts
-        for (Contact c : contactList) {
-            System.out.println(c);
+        Iterator<Contact> it = contactList.iterator();
+        while(it.hasNext())
+        {
+            System.out.println(it.next());
         }
     }
 }

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 //import jdk.internal.util.xml.impl.Input;
 
@@ -168,9 +169,12 @@ public class Calander extends App{
     //showDate function shows all the occasion in a date
     public void showDate(int day)
     {
+        Iterator<Occasion> it = dateArr[day-1].iterator();
         //Show all occasions in a date
-        for (Occasion meet:dateArr[day-1])
-            meet.print();
+        while(it.hasNext())
+        {
+            it.next().print();
+        }
     }
 
     //showContact function shows all meeting with a contact
@@ -178,6 +182,7 @@ public class Calander extends App{
     {
         //"Show all meetings with a contact"
         int day;
+        
         for(int i=0; i<contactMap.get(name).size();i++)
         {
             day = contactMap.get(name).get(i);
@@ -224,8 +229,10 @@ public class Calander extends App{
     public boolean findContactMap(String name)
     {
         //goes over keys (contact names)
-        for (String i : contactMap.keySet()) {
-            if(name.equals(i))
+        Iterator<String> it = contactMap.keySet().iterator();
+        while(it.hasNext())
+        {
+            if(name.equals(it.next()))
                 return true;
         }
         return false;
@@ -301,7 +308,6 @@ public class Calander extends App{
     //function addOccasion gets input and creates an occasion
     public void addOccasion(int choice, int day, int hour, int minute, int time, String details)
     {
-        
         //event
         if (choice==1)
         {
@@ -311,9 +317,6 @@ public class Calander extends App{
             date1.setMinutes(minute);
             Event e= new Event(date1, time, details);
             insertSorted(dateArr[day-1],dateArr[day-1].size(),e.startTime,e);
-          
-           
-             
         }
         //meeting
         else
@@ -331,8 +334,6 @@ public class Calander extends App{
                 intList.add(day);
                 contactMap.put(details, intList);
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
-                
-
             }
             else
             {
@@ -371,7 +372,6 @@ public class Calander extends App{
         contactMap.remove(name);
         contactMap.keySet().stream().forEach(System.out::println);
         showAll();
-
     }
 
     //function getDate prints to user instructions on how to put input

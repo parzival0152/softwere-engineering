@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Media extends App{
     public String title;
@@ -67,15 +68,15 @@ public class Media extends App{
         if(exist==-1)
             System.out.println("Name not found.");
         else
-            play(exist);
+            play(mediaList.get(exist));
     }
 
-    public void play(int place)
+    public void play(MV media)
     {
-        if (mediaList.get(place).video)
-            System.out.println("The video " + mediaList.get(place).name + " is now playing for " + mediaList.get(place).length + " minutes");
+        if (media.video)
+            System.out.println("The video " + media.name + " is now playing for " + media.length + " minutes");
         else
-            System.out.println("The song " + mediaList.get(place).name + " is now playing for " + mediaList.get(place).length + " minutes");
+            System.out.println("The song " + media.name + " is now playing for " + media.length + " minutes");
     }
 
     public int findMV(String name)
@@ -93,9 +94,10 @@ public class Media extends App{
 
     public void playAll()
     {
-        for(int i=0; i<mediaList.size(); i++)
+        Iterator<MV> it = mediaList.iterator();
+        while(it.hasNext())
         {
-            play(i);
+            play(it.next());
         }
     }
 
