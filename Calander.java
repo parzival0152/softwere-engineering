@@ -276,6 +276,8 @@ public class Calander extends App{
                     break;
                 }
             }
+
+            System.out.println("There are no events with those details.");
         }
 
         //if meeting
@@ -293,7 +295,7 @@ public class Calander extends App{
                 }
             }
             else
-                System.out.println("There are no events with this contact.");
+                System.out.println("There are no meetings with this contact.");
         }
     }
 
