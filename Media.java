@@ -35,7 +35,6 @@ public class Media extends App{
                         type = true;
                     else
                         type = false;
-                    System.out.println("type: "+type);
                     addMedia(name,time,type);
                     break;
                 case 2:
