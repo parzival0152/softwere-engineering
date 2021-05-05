@@ -36,7 +36,7 @@ abstract class Occasion {
             System.out.print(this.date.getHours());
         }
 
-        System.out.println(" and time length is " + this.time + "\n");
+        System.out.println(" and time length is " + this.time);
     }
     
 }

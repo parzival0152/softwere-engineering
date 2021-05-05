@@ -142,6 +142,8 @@ public class Calander extends App{
                 d= Integer.parseInt(Input.nextLine());
                 h= Integer.parseInt(Input.nextLine());
                 mn= Integer.parseInt(Input.nextLine());
+                System.out.println("Please enter the description of event you want to delete:");
+                name = Input.nextLine();
                 deleteOccasion(choice, d, h, mn, name);
             }
             //meeting
@@ -245,14 +247,14 @@ public class Calander extends App{
     }
 
     //function deleteOccasion recieves input from user and deletes occasion accordingly
-    public void deleteOccasion(int choice ,int day, int hour, int minute, String name)
+    public void deleteOccasion(int choice ,int day, int hour, int minute, String details)
     {
         //if event
         if(choice == 1)
         {
             for(int i=0; i<dateArr[day-1].size(); i++)
             {
-                if((dateArr[day-1].get(i).date.getHours()==hour)&&(dateArr[day-1].get(i).date.getMinutes()==minute))
+                if((dateArr[day-1].get(i).date.getHours()==hour)&&(dateArr[day-1].get(i).date.getMinutes()==minute)&&(dateArr[day-1].get(i) instanceof Event)&&dateArr[day-1].get(i).getDetails().equals(details))
                 {
                     dateArr[day-1].remove(i);
                     break;
@@ -263,11 +265,11 @@ public class Calander extends App{
         //if meeting
         else
         {
-            if(contactMap.containsKey(name))
+            if(contactMap.containsKey(details))
             {
                 for(int i=0; i<dateArr[day-1].size(); i++)
                 {
-                    if((dateArr[day-1].get(i).date.getHours()==hour)&&(dateArr[day-1].get(i).date.getMinutes()==minute))
+                    if((dateArr[day-1].get(i).date.getHours()==hour)&&(dateArr[day-1].get(i).date.getMinutes()==minute)&&dateArr[day-1].get(i) instanceof Meeting)
                     {
                         dateArr[day-1].remove(i);
                         break;
@@ -282,6 +284,7 @@ public class Calander extends App{
     //function checkOverlap checks for overlap in a specific day
     public void checkOverlap(int day)
     {
+        
         for(int i=0; i<dateArr[day-1].size()-1; i++)
         {
             //if time of one occasion overlaps with another deleter the later occasion
@@ -289,6 +292,7 @@ public class Calander extends App{
             {
                 dateArr[day-1].remove(i+1);
                 i--;
+                
             }
         }
         
@@ -297,6 +301,7 @@ public class Calander extends App{
     //function addOccasion gets input and creates an occasion
     public void addOccasion(int choice, int day, int hour, int minute, int time, String details)
     {
+        
         //event
         if (choice==1)
         {
@@ -306,6 +311,9 @@ public class Calander extends App{
             date1.setMinutes(minute);
             Event e= new Event(date1, time, details);
             insertSorted(dateArr[day-1],dateArr[day-1].size(),e.startTime,e);
+          
+           
+             
         }
         //meeting
         else
@@ -323,6 +331,8 @@ public class Calander extends App{
                 intList.add(day);
                 contactMap.put(details, intList);
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
+                
+
             }
             else
             {
@@ -332,6 +342,7 @@ public class Calander extends App{
 
                 // adding a meeting with contact to certain day
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
+          
             }
         }
 

@@ -16,7 +16,8 @@ public class Meeting extends Occasion{
 
     public void print()
     {
-        System.out.println("Contact person is " + this.person.name + ".");
         super.print();
+        System.out.println("Contact person is " + this.person.name + ".\n");
+        
     }
 }
