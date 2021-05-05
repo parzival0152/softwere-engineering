@@ -113,8 +113,8 @@ public class Phonebook extends App {
         Collections.sort(contactList, new NameComperator());
         for (int i = 0; i < contactList.size() - 1; i++) 
         {
-            if (contactList.get(i).name.equals(contactList.get(i + 1).name)
-                    && contactList.get(i).number.equals(contactList.get(i + 1).number)) {
+            if (contactList.get(i).name.equals(contactList.get(i + 1).name)) 
+            {
                 contactList.remove(i + 1);
                 i--;
             }
