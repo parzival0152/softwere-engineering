@@ -48,6 +48,11 @@ public class Calander extends App{
                 case 3:
                     System.out.println("What day are the meetings you're looking for? (1-30)\n");
                     int day = Integer.parseInt(Input.nextLine());
+                    while(day<1||day>30)
+                        {
+                            System.out.println("Please enter a valid day (1-30)\n");
+                            day= Integer.parseInt(Input.nextLine());
+                        }
                     showDate(day);
                     break;
                 case 4:
@@ -169,11 +174,6 @@ public class Calander extends App{
     //showDate function shows all the occasion in a date
     public void showDate(int day)
     {
-        if(day<0||day>30)
-        {
-            System.out.println("Please enter a day between 1 to 30. \n");
-            return;
-        }
         Iterator<Occasion> it = dateArr[day-1].iterator();
         //Show all occasions in a date
         while(it.hasNext())
