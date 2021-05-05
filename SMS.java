@@ -198,6 +198,10 @@ public class SMS extends App{
   
     public void update(String name)
     {
-        conversations.remove(name);
+        if(conversations!=null)
+        {
+            if(findConversation(name))
+                conversations.remove(name);
+        }
     }
 }
