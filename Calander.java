@@ -191,8 +191,8 @@ public class Calander extends App{
         
     }
 
-    //collisionFinder function checks if there is collision in the whole calander
-    //uses checkOverlap which checks if there is collision in one specific day
+    /*collisionFinder function checks if there is a collision in the whole calander
+    uses checkOverlap which checks if there is a collision in one specific day*/
     public void collisionFinder()
     {
         for(int i=0; i<30; i++)
@@ -202,8 +202,8 @@ public class Calander extends App{
             
     }
 
-    //showAll function shows all of the occasions in the whole calander
-    //uses showDate function which shows all the occasions in one day
+    /*showAll function shows all of the occasions in the whole calander
+    uses showDate function which shows all the occasions in one day*/
     public void showAll()
     {
         for(int i=0; i<30; i++)
@@ -218,10 +218,10 @@ public class Calander extends App{
         showAll();
     }
 
-    //function looks for a name in the contactMap and if found returns true
+    //function findContactMap looks for a name in the contactMap and if found returns true
     public boolean findContactMap(String name)
     {
-        //goes over keys (contact names) and if found returns true
+        //goes over keys (contact names)
         for (String i : contactMap.keySet()) {
             if(name.equals(i))
                 return true;
@@ -229,7 +229,7 @@ public class Calander extends App{
         return false;
     }
 
-    //function insertSorted inserts an occasion and sorting by time
+    //function insertSorted inserts an occasion and sorts by time
     static void insertSorted(ArrayList<Occasion> arr, int length, double key, Occasion meet)
     {
         int i;
@@ -247,7 +247,7 @@ public class Calander extends App{
     //function deleteOccasion recieves input from user and deletes occasion accordingly
     public void deleteOccasion(int choice ,int day, int hour, int minute, String name)
     {
-        //event
+        //if event
         if(choice == 1)
         {
             for(int i=0; i<dateArr[day-1].size(); i++)
@@ -260,7 +260,7 @@ public class Calander extends App{
             }
         }
 
-        //meeting
+        //if meeting
         else
         {
             if(contactMap.containsKey(name))
