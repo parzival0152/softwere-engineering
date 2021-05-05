@@ -163,6 +163,7 @@ public class Phonebook extends App {
 
     public void sortByNumber() {
         Collections.sort(contactList, new NumberComperator());
+        reverseList();
         set(contactList);
     }
 
