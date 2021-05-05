@@ -10,14 +10,19 @@ public class Calander extends App{
 
     Calander()
     {
+        //this constructor creates a hash map to see which contact has meetings in which days
+        //it also creates an array with 30 different arrays of occasion
         contactMap = new HashMap<String, ArrayList<Integer>>();
         dateArr = new ArrayList[30];
+        //initializing all 30 arrays
         for(int i=0; i<30; i++)
         {
             dateArr[i] = new ArrayList<Occasion>();
         }
     }
 
+    //run function creates a visual menu for the user with switch case
+    //user can choose whichever function they want to use
     public void run()
     {
        
@@ -42,18 +47,18 @@ public class Calander extends App{
                 case 3:
                     System.out.println("What day are the meetings you're looking for? (1-30)\n");
                     int day = Integer.parseInt(Input.nextLine());
-                    show_date(day);
+                    showDate(day);
                     break;
                 case 4:
                     System.out.println("What is the name of the contact you want to see meetings with?\n");
                     String name = Input.nextLine();
-                    show_contact(name);
+                    showContact(name);
                     break;
                 case 5:
-                    collision_finder();
+                    collisionFinder();
                     break;
                 case 6:
-                    show_all();
+                    showAll();
                     break;
                 case 7:
                     quit = true;
@@ -65,6 +70,9 @@ public class Calander extends App{
         }
     }
 
+    //function that creates an occasion according to user's input
+    //uses getDate which gets from the user the needed input
+    //uses addOccasion that creates the occasion
     public void add()
     {
         //Add an occasion
@@ -83,13 +91,10 @@ public class Calander extends App{
             if (choice == 1)
             {
                 valid=true;
-
+                arr = getDate();
                 System.out.println("Please enter description for the event\n");
                 description=Input.nextLine();
-                arr = getDate();
                 addOccasion( 1, arr.get(0), arr.get(1), arr.get(2), arr.get(3), description);
-                //this print is for checking
-
             }
 
             //meeting
@@ -116,6 +121,8 @@ public class Calander extends App{
         }
     }
 
+    //delete function gets input from user and deletes the occasion
+    //uses function deleteOccasion
     public void delete()
     {
         int choice;
@@ -127,6 +134,7 @@ public class Calander extends App{
             System.out.println("Would you like to delete a meeting or an event?");
             System.out.println("1. Event \n2. Meeting \n");
             choice = Integer.parseInt(Input.nextLine());
+            //event
             if (choice == 1)
             {
                 valid=true;
@@ -136,6 +144,7 @@ public class Calander extends App{
                 mn= Integer.parseInt(Input.nextLine());
                 deleteOccasion(choice, d, h, mn, name);
             }
+            //meeting
             else if (choice == 2)
             {
                 valid=true;
@@ -154,14 +163,16 @@ public class Calander extends App{
         }
     }
 
-    public void show_date(int day)
+    //showDate function shows all the occasion in a date
+    public void showDate(int day)
     {
         //Show all occasions in a date
         for (Occasion meet:dateArr[day-1])
             meet.print();
     }
 
-    public void show_contact(String name)
+    //showContact function shows all meeting with a contact
+    public void showContact(String name)
     {
         //"Show all meetings with a contact"
         int day;
@@ -180,7 +191,9 @@ public class Calander extends App{
         
     }
 
-    public void collision_finder()
+    //collisionFinder function checks if there is collision in the whole calander
+    //uses checkOverlap which checks if there is collision in one specific day
+    public void collisionFinder()
     {
         for(int i=0; i<30; i++)
         {
@@ -189,19 +202,23 @@ public class Calander extends App{
             
     }
 
-    public void show_all()
+    //showAll function shows all of the occasions in the whole calander
+    //uses showDate function which shows all the occasions in one day
+    public void showAll()
     {
         for(int i=0; i<30; i++)
         {
-            show_date(i+1);
+            showDate(i+1);
         }
     }
 
+    //print function calls showAll function to show all occasions
     public void print()
     {
-        show_all();
+        showAll();
     }
 
+    //function looks for a name in the contactMap and if found returns true
     public boolean findContactMap(String name)
     {
         //goes over keys (contact names) and if found returns true
@@ -212,10 +229,13 @@ public class Calander extends App{
         return false;
     }
 
+    //function insertSorted inserts an occasion and sorting by time
     static void insertSorted(ArrayList<Occasion> arr, int length, double key, Occasion meet)
     {
         int i;
+        //adds one more place in array
         arr.add(length, meet);
+        //checks to see when is the earlier occasion
         for (i = length - 1; (i >= 0 && arr.get(i).startTime > key); i--)
         {
             arr.set(i+1,arr.get(i));
@@ -224,8 +244,10 @@ public class Calander extends App{
 
     }
 
+    //function deleteOccasion recieves input from user and deletes occasion accordingly
     public void deleteOccasion(int choice ,int day, int hour, int minute, String name)
     {
+        //event
         if(choice == 1)
         {
             for(int i=0; i<dateArr[day-1].size(); i++)
@@ -237,6 +259,8 @@ public class Calander extends App{
                 }
             }
         }
+
+        //meeting
         else
         {
             if(contactMap.containsKey(name))
@@ -255,22 +279,25 @@ public class Calander extends App{
         }
     }
 
+    //function checkOverlap checks for overlap in a specific day
     public void checkOverlap(int day)
     {
         for(int i=0; i<dateArr[day-1].size()-1; i++)
         {
+            //if time of one occasion overlaps with another deleter the later occasion
             if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>dateArr[day-1].get(i+1).startTime)
             {
                 dateArr[day-1].remove(i+1);
-                System.out.println("removed meeting in place" + i+1);
                 i--;
             }
         }
         
     }
 
+    //function addOccasion gets input and creates an occasion
     public void addOccasion(int choice, int day, int hour, int minute, int time, String details)
     {
+        //event
         if (choice==1)
         {
             BetterDate date1= new BetterDate();
@@ -279,14 +306,8 @@ public class Calander extends App{
             date1.setMinutes(minute);
             Event e= new Event(date1, time, details);
             insertSorted(dateArr[day-1],dateArr[day-1].size(),e.startTime,e);
-            System.out.println("The Event is in day " + e.date.getDay() + " and time " + e.date.getHours() + ":" + e.date.getMinutes());
-            System.out.println("The description is " + e.description );
-            System.out.println("The occasions on day " + day + " are: ");
-            for( int i=0; i<dateArr[day-1].size(); i++)
-            {
-                dateArr[day-1].get(i).print();
-            }
         }
+        //meeting
         else
         {
             BetterDate date1= new BetterDate();
@@ -302,37 +323,28 @@ public class Calander extends App{
                 intList.add(day);
                 contactMap.put(details, intList);
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
-<<<<<<< Updated upstream
-                System.out.println("The occasions on day " + day + "are: ");
-                for( int i=0; i<dateArr[day-1].size(); i++)
-                {
-                    dateArr[day-1].get(i).print();
-                }
-=======
->>>>>>> Stashed changes
             }
             else
             {
+                //checks if in hashmap of key has already the added day
                 if(!contactMap.get(details).contains(day))
                     contactMap.get(details).add(day);
 
-                System.out.println("Contact " + details + " has meetings in days " + contactMap.get(details));
                 // adding a meeting with contact to certain day
                 insertSorted(dateArr[day-1],dateArr[day-1].size(),meet1.startTime,meet1);
-                System.out.println("The Meeting is in day " + meet1.date.getDay() + " and time " + meet1.date.getHours() + ":" + meet1.date.getMinutes());
             }
         }
 
 
     }
 
+    //function update updates the contacts according to phonebook
+    //function is called when phonebook deletes a contact
     public void update(String name)
     {
-        System.out.println("This calander update.");
         //remove contact from contactMap
         int day;
-        
-        //used the show_contact function
+        //used the showContact function
         for(int i=0; i<contactMap.get(name).size();i++)
         {
             day = contactMap.get(name).get(i);
@@ -347,10 +359,12 @@ public class Calander extends App{
         //remove all meeting with contact
         contactMap.remove(name);
         contactMap.keySet().stream().forEach(System.out::println);
-        show_all();
+        showAll();
 
     }
 
+    //function getDate prints to user instructions on how to put input
+    //also checks that input is okay
     public ArrayList<Integer> getDate()
     {
         int d, h, mn;
@@ -393,6 +407,5 @@ public class Calander extends App{
 
         return arr;
     }
-
 
 }
