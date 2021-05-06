@@ -156,7 +156,7 @@ public class Calander extends App{
             else if (choice == 2)
             {
                 valid=true;
-                System.out.println("Please enter the day, hour and minute of event you want to delete:");
+                System.out.println("Please enter the day, hour and minute of event you want to delete with enters:");
                 d= Integer.parseInt(Input.nextLine());
                 h= Integer.parseInt(Input.nextLine());
                 mn= Integer.parseInt(Input.nextLine());
@@ -303,19 +303,23 @@ public class Calander extends App{
     public void checkOverlap(int day)
     {
         
-        for(int i=0; i<dateArr[day-1].size()-1; i++)
+        for(int i=0; i<=dateArr[day-1].size()-1; i++)
         {
-            //if time of one occasion overlaps with another deleter the later occasion
-            if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>dateArr[day-1].get(i+1).startTime)
+            if(i<dateArr[day-1].size()-1)
             {
-                dateArr[day-1].remove(i+1);
-                i--;  
+
+                //if time of one occasion overlaps with another deleter the later occasion
+                if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>dateArr[day-1].get(i+1).startTime)
+                {
+                    dateArr[day-1].remove(i+1);
+                    i--;  
+                }
             }
             //check if occasion goes into next day
             if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>=24)
             {
                 //remove occasions in following day that overlap
-                for(int j=0; j<dateArr[day].size()-1; j++)
+                for(int j=0; j<=dateArr[day].size()-1; j++)
                 {
                     if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)-24>dateArr[day].get(j).startTime)
                     {
