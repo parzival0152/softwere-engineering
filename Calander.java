@@ -317,7 +317,7 @@ public class Calander extends App{
                 //remove occasions in following day that overlap
                 for(int j=0; j<dateArr[day].size()-1; j++)
                 {
-                    if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>dateArr[day].get(j).startTime)
+                    if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)-24>dateArr[day].get(j).startTime)
                     {
                         dateArr[day].remove(j);
                         j--;  
