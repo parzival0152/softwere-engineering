@@ -305,6 +305,22 @@ public class Calander extends App{
         
         for(int i=0; i<=dateArr[day-1].size()-1; i++)
         {
+
+             //check if occasion goes into next day
+             if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>=24)
+             {
+                 //remove occasions in following day that overlap
+                 for(int j=0; j<=dateArr[day].size()-1; j++)
+                 {
+                     if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)-24>dateArr[day].get(j).startTime)
+                     {
+                         dateArr[day].remove(j);
+                         j--;  
+                     }
+                 }
+             }
+
+
             if(i<dateArr[day-1].size()-1)
             {
 
@@ -315,19 +331,7 @@ public class Calander extends App{
                     i--;  
                 }
             }
-            //check if occasion goes into next day
-            if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)>=24)
-            {
-                //remove occasions in following day that overlap
-                for(int j=0; j<=dateArr[day].size()-1; j++)
-                {
-                    if((dateArr[day-1].get(i).startTime+(double)dateArr[day-1].get(i).time/60)-24>dateArr[day].get(j).startTime)
-                    {
-                        dateArr[day].remove(j);
-                        j--;  
-                    }
-                }
-            }
+          
         }
         
     }
