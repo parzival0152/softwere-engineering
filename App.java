@@ -51,7 +51,7 @@ abstract class App {
     //return contact list in place of index
     public Contact getContact(int index)
     {
-        return (contactList.get(index));
+        return (new Contact(contactList.get(index).name, contactList.get(index).number));
     }
 
 
