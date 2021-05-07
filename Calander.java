@@ -265,6 +265,7 @@ public class Calander extends App{
     //function deleteOccasion recieves input from user and deletes occasion accordingly
     public void deleteOccasion(int choice ,int day, int hour, int minute, String details)
     {
+        boolean flag=false;
         //if event
         if(choice == 1)
         {
@@ -277,9 +278,8 @@ public class Calander extends App{
                 }
             }
 
-            System.out.println("There are no events with those details.");
+            System.out.println("There are no events with these details.");
         }
-
         //if meeting
         else
         {
@@ -290,9 +290,12 @@ public class Calander extends App{
                     if((dateArr[day-1].get(i).date.getHours()==hour)&&(dateArr[day-1].get(i).date.getMinutes()==minute)&&dateArr[day-1].get(i) instanceof Meeting)
                     {
                         dateArr[day-1].remove(i);
+                        flag=true;
                         break;
                     }
                 }
+                if(flag==false)
+                    System.out.println("There are no meetings with these details.");
             }
             else
                 System.out.println("There are no meetings with this contact.");
@@ -403,8 +406,6 @@ public class Calander extends App{
         }
         //remove all meeting with contact
         contactMap.remove(name);
-        contactMap.keySet().stream().forEach(System.out::println);
-        showAll();
     }
 
     //function getDate prints to user instructions on how to put input

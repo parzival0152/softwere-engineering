@@ -30,6 +30,7 @@ public class Phone {
 
     public void printAll()
     {
+        System.out.println("Printing all:\n********************************************");
         System.out.println("This is Phonebook:");
         pb.print();
         System.out.println();
@@ -41,6 +42,7 @@ public class Phone {
         System.out.println();
         System.out.println("This is Media:");
         m.print();
+        System.out.println("\n********************************************");
     }
 
     //closing the scanner before exiting
