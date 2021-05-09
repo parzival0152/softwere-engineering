@@ -1,27 +1,27 @@
-//class Phone contains apps and updates SMS and Calander according to Phonebook
+//class Phone contains apps and updates SMS and calendar according to Phonebook
 public class Phone {
     public Phonebook pb;
-    public Calander c;
+    public Calendar c;
     public SMS s;
     public Media m;
 
 
-    //constructor:creating the Apps:phonebook,SMS,Media,Calander
+    //constructor:creating the Apps:phonebook,SMS,Media,calendar
     //we send "this" to phonebook so we cn call to update from phonebook
     public Phone() {
         this.pb = new Phonebook(this);
-        this.c = new Calander();
+        this.c = new Calendar();
         this.s = new SMS();
         this.m = new Media();
     }
 
 
     /*update get the name of the removed contact and call the update 
-    functions of SMS and Calander
+    functions of SMS and calendar
     */
     public void update(String name) {
         
-        // updating SMS and Calander according to changed Phonebook
+        // updating SMS and calendar according to changed Phonebook
         s.update(name);
         c.update(name);
     }
@@ -37,7 +37,7 @@ public class Phone {
         System.out.println("This is SMS:");
         s.print();
         System.out.println();
-        System.out.println("This is Calander:");
+        System.out.println("This is calendar:");
         c.print();
         System.out.println();
         System.out.println("This is Media:");
@@ -59,7 +59,7 @@ public class Phone {
     public void runp() {
         boolean quit = false;
         while (!quit) {
-            int option = Helper.option("Phonebook", "SMS", "Calander", "Media", "Print all", "Exit");
+            int option = Helper.option("Phonebook", "SMS", "calendar", "Media", "Print all", "Exit");
             switch (option) {
                 case 1:
                     //phonebook
@@ -70,7 +70,7 @@ public class Phone {
                     s.run();
                     break;
                 case 3:
-                    //Calander
+                    //calendar
                     c.run();
                     break;
                 case 4:

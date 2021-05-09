@@ -183,6 +183,7 @@ public class SMS extends App{
 
     public void print(String name)
     {
+        System.out.println(name+":");
         System.out.println(conversations.get(name));
     }
 

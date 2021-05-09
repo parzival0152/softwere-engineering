@@ -4,12 +4,12 @@ import java.util.Iterator;
 
 //import jdk.internal.util.xml.impl.Input;
 
-public class Calander extends App{
+public class Calendar extends App{
    
     HashMap<String, ArrayList<Integer>> contactMap;
     ArrayList<Occasion>[] dateArr;
 
-    Calander()
+    Calendar()
     {
         //this constructor creates a hash map to see which contact has meetings in which days
         //it also creates an array with 30 different arrays of occasion
@@ -205,7 +205,7 @@ public class Calander extends App{
         
     }
 
-    /*collisionFinder function checks if there is a collision in the whole calander
+    /*collisionFinder function checks if there is a collision in the whole calendar
     uses checkOverlap which checks if there is a collision in one specific day*/
     public void collisionFinder()
     {
@@ -216,7 +216,7 @@ public class Calander extends App{
             
     }
 
-    /*showAll function shows all of the occasions in the whole calander
+    /*showAll function shows all of the occasions in the whole calendar
     uses showDate function which shows all the occasions in one day*/
     public void showAll()
     {
