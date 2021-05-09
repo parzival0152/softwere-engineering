@@ -193,7 +193,7 @@ public class SMS extends App{
             return;
         for(String i:conversations.keySet())
         {
-            System.out.print(i+": ");
+            System.out.println(i+":");
             System.out.println(conversations.get(i));
         }
     }
