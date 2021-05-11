@@ -144,7 +144,7 @@ public class Calendar extends App{
             if (choice == 1)
             {
                 valid=true;
-                System.out.println("Please enter the day, hour and minute of event you want to delete:");
+                System.out.println("Please enter the day, hour and minute of event you want to delete with enters:");
                 d= Integer.parseInt(Input.nextLine());
                 h= Integer.parseInt(Input.nextLine());
                 mn= Integer.parseInt(Input.nextLine());
@@ -274,11 +274,12 @@ public class Calendar extends App{
                 if((dateArr[day-1].get(i).date.getHours()==hour)&&(dateArr[day-1].get(i).date.getMinutes()==minute)&&(dateArr[day-1].get(i) instanceof Event)&&dateArr[day-1].get(i).getDetails().equals(details))
                 {
                     dateArr[day-1].remove(i);
+                    flag=true;
                     break;
                 }
             }
-
-            System.out.println("There are no events with these details.");
+            if (flag==false)
+            	System.out.println("There are no events with these details.");
         }
         //if meeting
         else
