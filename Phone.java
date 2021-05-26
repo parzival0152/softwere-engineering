@@ -4,6 +4,7 @@ public class Phone {
     public Calendar c;
     public SMS s;
     public Media m;
+    public Calculator cal;
 
 
     //constructor:creating the Apps:phonebook,SMS,Media,calendar
@@ -13,6 +14,7 @@ public class Phone {
         this.c = new Calendar();
         this.s = new SMS();
         this.m = new Media();
+        this.cal = new Calculator();
     }
 
 
@@ -42,6 +44,9 @@ public class Phone {
         System.out.println();
         System.out.println("This is Media:");
         m.print();
+        System.out.println();
+        System.out.println("This is Calculator:");
+        cal.print();
         System.out.println("\n********************************************");
     }
 
@@ -59,7 +64,7 @@ public class Phone {
     public void runp() {
         boolean quit = false;
         while (!quit) {
-            int option = Helper.option("Phonebook", "SMS", "calendar", "Media", "Print all", "Exit");
+            int option = Helper.option("Phonebook", "SMS", "calendar", "Media", "Calculator", "Print all", "Exit");
             switch (option) {
                 case 1:
                     //phonebook
@@ -78,10 +83,14 @@ public class Phone {
                     m.run();
                     break;
                 case 5:
+                    //Calculator
+                    cal.run();
+                    break;
+                case 6:
                     //print all the phone content
                     printAll();
                     break;
-                case 6:
+                case 7:
                     //exit
                     quit = true;
                     quit();
