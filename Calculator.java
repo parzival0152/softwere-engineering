@@ -2,10 +2,12 @@ import java.lang.Math;
 import java.util.ArrayList;
 
 public class Calculator extends App {
+    public ArrayList<String> history = new ArrayList<>();
     void run()
     {
         System.out.println("Enter calculation:");
         String calc = Input.nextLine();
+        history.add(calc + " = ");
 
         char[] charCalc = calc.toCharArray();
         ArrayList<Integer> open = new ArrayList<>(),close = new ArrayList<>();
@@ -25,7 +27,8 @@ public class Calculator extends App {
             open.remove(open.size());
             close.remove(0);
         }
-        
+        System.out.println(calc);
+        history.add(calc+ "\n");
     }
 
     //calculates part within parentheses. uses calculation.
@@ -143,7 +146,7 @@ public class Calculator extends App {
 
     void print()
     {
-
+        System.out.println("Calculator History\n"+history);
     }
     
 
